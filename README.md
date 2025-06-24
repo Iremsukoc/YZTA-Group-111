@@ -49,7 +49,7 @@ Bu proje, Yapay Zeka ve Teknoloji Akademisi 2025 Bootcamp kapsamında geliştiri
 
 ## ⚙️ Ürün Özellikleri
 
-**🤖 LLM Destekli Risk Sınıflandırması:** Semptomlar doğal dil ile girildiğinde, sistem LLaMA büyük dil modelini kullanarak kullanıcının durumunu analiz eder ve risk grubunu belirler (Düşük, Orta, Yüksek, Çok Yüksek).
+**🤖 LLM Destekli Risk Sınıflandırması:** Semptomlar doğal dil ile girildiğinde, sistem LLaMA büyük dil modelini kullanarak kullanıcının durumunu analiz eder ve yönlendirmede bulunur.
 
 **🧪 Görüntü İşleme ile Teşhis Destekleme:** Röntgen, MR gibi tıbbi görüntüler sisteme yüklendiğinde, önceden eğitilmiş CNN tabanlı modeller aracılığıyla potansiyel malignite tespiti yapılır.
 
