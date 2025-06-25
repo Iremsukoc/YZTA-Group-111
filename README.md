@@ -1,5 +1,4 @@
-🇹🇷 [Türkçe için tıklayın](README_TR.md)
-🇺🇸 For English, see below.
+🇺🇸 [Click for English](README_ENG.md)
 
 ## 🧠 Takım İsmi: [Belirlenecek] 
 
@@ -41,7 +40,7 @@ Bu proje, Yapay Zeka ve Teknoloji Akademisi 2025 Bootcamp kapsamında geliştiri
 
 *  React / Next.js (Frontend)
 
-*  Figma (Desing)  
+*  Figma (Design)  
 
 *  GitHub Projects, Asana (Project Management) 
 
