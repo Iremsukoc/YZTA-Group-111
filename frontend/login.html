@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEALTH - Welcome Back</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="left-side">
+            <img src="images/login-page-image.png" alt="Login Illustration">
+        </div>
+        <div class="right-side">
+            <div class="logo">HEALTH</div>
+            
+            <h1 class="welcome-title">Welcome Back</h1>
+            <p class="welcome-subtitle">Enter your email and password to access your account</p>
+
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" class="form-input" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle">
+                            <img src="images/eye-icon.svg" alt="Show Password">
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                
+                <button type="button" class="btn btn-google">
+                    <div class="google-icon"></div>
+                    Sign In with Google
+                </button>
+            </form>
+
+            <div class="signup-link">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
