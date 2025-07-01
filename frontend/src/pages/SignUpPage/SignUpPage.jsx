@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './SignUpPage.module.css';
 import eyeIcon from '../../assets/eye-icon.svg';
+import googleIcon from '../../assets/google-icon.svg';
+
 
 function SignUpPage() {
   const [password, setPassword] = useState('');
@@ -101,7 +103,10 @@ function SignUpPage() {
             <label className={styles.checkboxLabel}>I agree to the <Link to="/terms">Terms & Conditions</Link></label>
           </div>
           <button type="submit" className={styles.btnPrimary} disabled={isButtonDisabled}>Create an account</button>
-          <button type="button" className={styles.btnGoogle}>Sign In with Google</button>
+          <button type="button" className={styles.btnGoogle}>
+            <img src={googleIcon} alt="Google Icon" className={styles.googleIcon} />
+            Sign In with Google
+          </button>        
         </form>
         <div className={styles.switchLink}>
           Have an account? <Link to="/login">Sign In</Link>

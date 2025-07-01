@@ -1,4 +1,3 @@
-/* Bu dosya SignUp CSS ile birçok ortak stile sahip, daha büyük projelerde bu ortak stiller ayrı bir dosyaya alınabilir. */
 .pageContainer {
     display: flex;
     align-items: center;
@@ -139,6 +138,10 @@
     background: var(--white);
     color: var(--text-light);
     border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
   }
   
   .btnGoogle:hover {
@@ -156,4 +159,9 @@
     .loginContainer { flex-direction: column; max-width: 450px; }
     .leftSide { display: none; }
     .rightSide { padding: 40px 30px; }
+  }
+
+  .googleIcon {
+    width: 20px;
+    height: 20px;
   }

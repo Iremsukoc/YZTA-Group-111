@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import loginImage from '../../assets/login-page-image.png';
 import eyeIcon from '../../assets/eye-icon.svg';
+import googleIcon from '../../assets/google-icon.svg';
+
 
 function LoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -38,7 +40,10 @@ function LoginPage() {
               </div>
             </div>
             <button type="submit" className={styles.btnPrimary}>Sign In</button>
-            <button type="button" className={styles.btnGoogle}>Sign In with Google</button>
+            <button type="button" className={styles.btnGoogle}>
+              <img src={googleIcon} alt="Google Icon" className={styles.googleIcon} />
+              Sign In with Google
+            </button>          
           </form>
           <div className={styles.switchLink}>
             Don't have an account? <Link to="/signup">Sign Up</Link>
