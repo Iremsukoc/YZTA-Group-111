@@ -38,7 +38,6 @@ git checkout -b ml-1.0.2/image-classification-core
 cd breast_cancer_project_pytorch
 ```
 
-
 ### 2. Sanal Ortam ve Gereksinimler
 
 ```bash
@@ -51,11 +50,35 @@ pip install -r requirements.txt
 
 ## 🧠 Model Bilgisi
 
-Model: **ResNet101**  
-Kayıp fonksiyonu: CrossEntropyLoss  
-Optimizasyon: Adam  
-Epoch: 10  
+Model: **ResNet101**
+Kayıp fonksiyonu: CrossEntropyLoss
+Optimizasyon: Adam
+Epoch: 10
 En iyi model `.pth` dosyası olarak `saved_model/best_model.pth` altında saklanır.
+
+---
+
+## 🧪 Modeli Eğitme
+
+```bash
+cd src
+python train.py
+```
+
+> `train.py` dosyası, config.py'deki ayarları kullanarak modeli eğitir.
+
+---
+
+## 🔍 Tek Görselle Tahmin
+
+Aşağıdaki komut ile test verisinden rastgele bir örnek üzerinde tahmin yapabilirsiniz:
+
+```bash
+cd src
+python predict_single_image.py
+```
+
+> `predict_single_image.py`, test klasöründen bir görsel seçerek `best_model.pth` ile tahmin üretir.
 
 ---
 
@@ -63,17 +86,17 @@ En iyi model `.pth` dosyası olarak `saved_model/best_model.pth` altında saklan
 
 ### ✅ Eğitim Sonuçları
 
-- Train Accuracy: **99.37%**
-- Validation Accuracy: **96.17%**
+* Train Accuracy: **99.37%**
+* Validation Accuracy: **96.17%**
 
 ### 📉 Classification Report
 
-| Sınıf     | Precision | Recall | F1-Score | Support |
-|-----------|-----------|--------|----------|---------|
-| benign    | 0.91      | 0.87   | 0.89     | 135     |
-| malignant | 0.86      | 0.78   | 0.82     | 64      |
-| normal    | 0.75      | 0.95   | 0.84     | 41      |
-| **Accuracy** |       |        | **0.86** | 240     |
+| Sınıf        | Precision | Recall | F1-Score | Support |
+| ------------ | --------- | ------ | -------- | ------- |
+| benign       | 0.91      | 0.87   | 0.89     | 135     |
+| malignant    | 0.86      | 0.78   | 0.82     | 64      |
+| normal       | 0.75      | 0.95   | 0.84     | 41      |
+| **Accuracy** |           |        | **0.86** | 240     |
 
 ### 📌 Confusion Matrix
 
@@ -85,20 +108,20 @@ En iyi model `.pth` dosyası olarak `saved_model/best_model.pth` altında saklan
 
 ---
 
-## 🧪 Modeli Test Etme
+## 🛠️ Kullanılan Teknolojiler
 
-Aşağıdaki komut ile test verisinden rastgele bir örnek üzerinde tahmin yapabilirsiniz:
-
-```bash
-python src/predict_single_image.py
-```
+* Python 3.10+
+* PyTorch
+* torchvision
+* NumPy, Matplotlib
 
 ---
 
 ## 📌 Notlar
 
-- Model eğitimi sırasında en iyi doğruluk elde edilen model `saved_model/` altında saklanır.
-- `config.py` dosyasındaki parametreleri değiştirerek eğitim ayarlarını özelleştirebilirsiniz.
-- `llm_inference.py` modülü, çıktıyı doğal dilde yorumlama için örnek olarak sunulmuştur.
+* Model eğitimi sırasında en iyi doğruluk elde edilen model `saved_model/` altında saklanır.
+* `config.py` dosyasındaki parametreleri değiştirerek eğitim ayarlarını özelleştirebilirsiniz.
+* `llm_inference.py` modülü, çıktıyı doğal dilde yorumlama için örnek olarak sunulmuştur.
+* `.env` dosyası `.gitignore` içinde tanımlıdır, hassas bilgiler burada tutulabilir.
+* CUDA desteği varsa GPU otomatik olarak kullanılır.
 
----
