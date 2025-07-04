@@ -1,0 +1,27 @@
+# Sanal ortam
+venv/
+.env
+*.env
+
+# Derlenmiş Python dosyaları
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Model dosyaları
+*.pth
+*.pt
+
+# IDE ve sistem dosyaları
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Jupyter checkpoint
+.ipynb_checkpoints/
+
+# Geçici dosyalar
+*.tmp
+*.bak
+*.swp
