@@ -1,5 +1,3 @@
-🇺🇸 [Click for English](README_ENG.md)
-
 ## 🧠 Takım İsmi: [Belirlenecek] 
 
 ### ⚓ Takım Üyeleri
@@ -12,7 +10,7 @@
 
 *  🧑🏻 Ali İhsan Sancar
 
-*  🧑🏻 Sefa Sinanoğlu
+*  🧑🏻 Muhammed Sefa Sinanoğlu
 
 ## 🚀 Proje İsmi: [Belirlenecek] 
 ### 🔖 Projenin Amacı
@@ -28,27 +26,21 @@ Bu proje, Yapay Zeka ve Teknoloji Akademisi 2025 Bootcamp kapsamında geliştiri
 
 ## 📚 Kullanılan Teknolojiler
 
-*  LLaMA 3 (LLM) 
+*  AI - Gemini 1.5 Pro 
 
-*  Scikit-learn, joblib (ML)
+*  Image Processing - CNN, ResNet
 
-*  Gemini (AI)
-  
-*  LangChain (Agent) 
+*  Frontend - React / Next.js 
 
-*  CNN, OpenCV, TensorFlow/Keras (Image Processing)
+*  Design - Figma  
 
-*  React / Next.js (Frontend)
+*  Project Management - GitHub Projects, Asana  
 
-*  Figma (Design)  
-
-*  GitHub Projects, Asana (Project Management) 
-
-*  Kaggle, TCGA (Datasets)
+*  Datasets - Kaggle, Hugging Face
 
 ## ⚙️ Ürün Özellikleri
 
-**🤖 LLM Destekli Risk Sınıflandırması:** Semptomlar doğal dil ile girildiğinde, sistem LLaMA büyük dil modelini kullanarak kullanıcının durumunu analiz eder ve yönlendirmede bulunur.
+**🤖 LLM Destekli Risk Sınıflandırması:** Semptomlar doğal dil ile girildiğinde, sistem büyük dil modelini kullanarak kullanıcının durumunu analiz eder ve yönlendirmede bulunur.
 
 **🧪 Görüntü İşleme ile Teşhis Destekleme:** Röntgen, MR gibi tıbbi görüntüler sisteme yüklendiğinde, önceden eğitilmiş CNN tabanlı modeller aracılığıyla potansiyel malignite tespiti yapılır.
 
