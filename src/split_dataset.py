@@ -27,7 +27,7 @@ def split_and_copy():
         images = [f for f in os.listdir(src_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
         total = len(images)
         if total == 0:
-            print(f"⚠️ Uyarı: {cls} klasörü boş!")
+            print(f" Uyarı: {cls} klasörü boş!")
             continue
 
         random.shuffle(images)
@@ -48,7 +48,7 @@ def split_and_copy():
 
         print(f"{cls}: Toplam {total} → train {len(splits['train'])}, val {len(splits['val'])}, test {len(splits['test'])}")
 
-    print("✅ Split işlemi tamamlandı.")
+    print(" Split işlemi tamamlandı.")
 
 if __name__ == "__main__":
     split_and_copy()

@@ -4,10 +4,22 @@ from PIL import Image
 import torch
 from torchvision import transforms
 from model import get_model
-from config import MODEL_PATH, IMG_SIZE, CLASSES, DEVICE
+from config import IMG_SIZE, CLASSES, DEVICE  # MODEL_PATH kaldırıldı!
 
-def predict_random_image():
+def predict_single_image():
     print("Script başladı")
+
+    # MODEL SEÇİMİ
+    model_dir = "saved_model"
+    model_files = [f for f in os.listdir(model_dir) if f.endswith(".pth")]
+
+    print("\n Mevcut modeller:")
+    for i, model_name in enumerate(model_files):
+        print(f"{i}: {model_name}")
+
+    choice = int(input("\n Kullanmak istediğiniz modeli seçin (index girin): "))
+    MODEL_PATH = os.path.join(model_dir, model_files[choice])
+    print(f" Seçilen model: {MODEL_PATH}")
 
     # Dataset test dizini
     dataset_root = os.path.join("data", "breast_cancer_dataset_split", "test")
@@ -31,38 +43,57 @@ def predict_random_image():
     print(f"Görsel adı: {image_file}")
     print(f"Dosya mevcut mu? {os.path.exists(image_path)}")
 
+    import matplotlib.pyplot as plt
+
+
     transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.Lambda(lambda img: img.convert("RGB")),
-    transforms.ToTensor(),
-    transforms.Normalize([0.5, 0.5, 0.5],
-                         [0.5, 0.5, 0.5])
-])
+        transforms.Resize((224, 224)),
+        transforms.Lambda(lambda img: img.convert("RGB")),
+        transforms.ToTensor(),
+        transforms.Normalize([0.5, 0.5, 0.5],
+                             [0.5, 0.5, 0.5])
+    ])
 
     image = Image.open(image_path)
     image = transform(image).unsqueeze(0).to(DEVICE)
 
-    # Model
     model = get_model().to(DEVICE)
     model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
     model.eval()
 
-    # Tahmin
+
     with torch.no_grad():
         outputs = model(image)
+        if outputs is None:
+            print("❌ Model çıktı üretmedi.")
+            return
+
         _, pred = torch.max(outputs, 1)
 
-    predicted_class = CLASSES[pred.item()]
-    probs = torch.nn.functional.softmax(outputs, dim=1)
-    print(" Sınıf olasılıkları:", probs.cpu().numpy())
+        try:
+            predicted_class = CLASSES[pred.item()]
+        except Exception as e:
+            print(f"❌ CLASSES hatası: {e}")
+            return
 
-    # Sonuç
+        probs = torch.nn.functional.softmax(outputs, dim=1)
+
+    print(" Sınıf olasılıkları:", probs.cpu().numpy())
     print(f"\n Tahmin edilen sınıf: {predicted_class}")
     print(f" Gerçek sınıf       : {selected_class}")
-    
+
+    from llm_inference import get_llm_response  
+    llm_output = get_llm_response(predicted_class)
+    print("\n📘 LLM'den açıklama:")
+    print(llm_output)
+
+
+    img = Image.open(image_path)
+    plt.imshow(img)
+    plt.title(f"Tahmin: {predicted_class}")
+    plt.axis('off')
+    plt.show()
 
 
 if __name__ == "__main__":
-    predict_random_image()
-
-
+    predict_single_image()

@@ -1,6 +1,6 @@
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
-from src.config import *
+from config import *
 from PIL import Image  # Burası çok önemli
 
 def get_dataloaders():
