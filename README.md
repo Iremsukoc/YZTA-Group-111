@@ -12,7 +12,7 @@
 
 *  🧑🏻 Ali İhsan Sancar
 
-*  🧑🏻 Sefa Sinanoğlu
+*  🧑🏻 Muhammed Sefa Sinanoğlu
 
 ## 🚀 Proje İsmi: [Belirlenecek] 
 ### 🔖 Projenin Amacı

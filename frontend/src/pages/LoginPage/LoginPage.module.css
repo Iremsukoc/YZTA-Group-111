@@ -1,0 +1,167 @@
+.pageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .loginContainer {
+    display: flex;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 1000px;
+    width: 100%;
+    min-height: 600px;
+  }
+  
+  .leftSide {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+  }
+  
+  .leftSide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .rightSide {
+    flex: 1;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .welcomeTitle {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .welcomeSubtitle {
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+  
+  .formGroup {
+    margin-bottom: 25px;
+  }
+  
+  .formLabel {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  .formInput {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    background: var(--background-light);
+    border-radius: 12px;
+    font-size: 16px;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+  }
+  
+  .formInput:focus {
+    outline: none;
+    background: #e8f2ff;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  }
+  
+  .passwordWrapper {
+    position: relative;
+  }
+  
+  .passwordToggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .passwordToggle img {
+    width: 24px;
+    opacity: 0.6;
+  }
+  
+  .btnPrimary, .btnGoogle {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .btnPrimary {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+  }
+  
+  .btnPrimary:hover {
+    background: var(--primary-color-dark);
+    transform: translateY(-2px);
+  }
+  
+  .btnGoogle {
+    background: var(--white);
+    color: var(--text-light);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .btnGoogle:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+  }
+  
+  .switchLink {
+    text-align: center;
+    color: var(--text-light);
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 850px) {
+    .loginContainer { flex-direction: column; max-width: 450px; }
+    .leftSide { display: none; }
+    .rightSide { padding: 40px 30px; }
+  }
+
+  .googleIcon {
+    width: 20px;
+    height: 20px;
+  }
