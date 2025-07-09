@@ -1,28 +1,29 @@
 from fastapi import FastAPI
-from api.v1.api import api_router
+from controllers import auth_controller, user_controller
 from fastapi.middleware.cors import CORSMiddleware
+from core.firebase_config import initialize_firebase_app
 
 app = FastAPI(
-    title="Cancer Risk Assessment API",
-    description="Kanser riski belirleme uygulaması için backend servisleri.",
+    title="YZTA-Bootcamp Health Assistant API",
     version="1.0.0"
 )
 
-origins = [
-    "http://localhost:5173",  # Vite React projesinin varsayılan adresi
-    "http://127.0.0.1:5173",
-    # Buraya deploy ettiğinizde frontend'inizin domain adresini de ekleyebilirsiniz.
-]
+@app.on_event("startup")
+async def startup_event():
+        
+        initialize_firebase_app()
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"], # Geliştirme için şimdilik hepsi, sonra düzenlenmeli
     allow_credentials=True,
-    allow_methods=["*"], # Tüm HTTP metodlarına izin ver (GET, POST, vb.)
-    allow_headers=["*"], # Tüm header'lara izin ver
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(auth_controller.router)
+app.include_router(user_controller.router)
 
 @app.get("/")
 def read_root():
