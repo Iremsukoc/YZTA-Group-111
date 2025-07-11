@@ -9,7 +9,7 @@ def main():
     with open('config.yaml', 'r') as file:
         config = yaml.safe_load(file)
 
-    # Parametreler
+    # Parameteres
     data_dir = config['data_dir']
     img_size = config['img_size']
     batch_size = config['batch_size']
@@ -18,22 +18,20 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
-    # Sınıf dağılımı
+    # Class distribution
     plot_class_distribution(os.path.join(data_dir, 'Training'))
 
-    # Veri yükleyicilerini oluştur
+    # Create data loaders
     train_loader, test_loader = create_data_loaders(data_dir, img_size, batch_size)
 
-    # Modeli oluştur
+    # Create model
     model = BrainTumorCNN(num_classes=4).to(device)
 
-    # Modeli eğit
+    # Train model
     history = train_model(model, train_loader, epochs, model_path, device)
 
-    # Eğitim sonuçlarını görselleştir
     plot_training_history(history, save_path='results/training_plot.png')
 
-    # Test seti üzerinde değerlendir
     evaluate_model(model, test_loader, device)
 
 if __name__ == "__main__":
