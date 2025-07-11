@@ -46,8 +46,8 @@ brain_tumor_classification/
 ### Installation
 1. Clone the repository or set up the project directory:
    ```bash
-   git clone <repository-url> 
-   cd brain_tumor_classification
+   git clone <https://github.com/Iremsukoc/YZTA-Bootcamp> 
+   cd ml-2.0.1/brain-tumor-image-classification
    ```
 2. Install dependencies:
    ```bash
