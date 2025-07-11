@@ -182,6 +182,18 @@
     color: var(--text-light);
     margin-top: 20px;
   }
+
+  .errorMessage {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb; 
+    text-align: center;
+    font-size: 14px;
+  }
   
   @media (max-width: 550px) {
     .signupContainer {
