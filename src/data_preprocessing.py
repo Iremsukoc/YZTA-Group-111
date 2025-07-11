@@ -24,7 +24,8 @@ def plot_class_distribution(train_dir):
     plt.show()
 
 def create_data_loaders(data_dir, img_size, batch_size):
-    # Veri artırma ve normalizasyon
+    
+    # Data augmentation and normalization
     train_transforms = transforms.Compose([
         transforms.Resize((img_size, img_size)),
         transforms.RandomRotation(20),
@@ -40,11 +41,9 @@ def create_data_loaders(data_dir, img_size, batch_size):
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
-    # Veri setlerini yükle
     train_dataset = datasets.ImageFolder(os.path.join(data_dir, 'Training'), transform=train_transforms)
     test_dataset = datasets.ImageFolder(os.path.join(data_dir, 'Testing'), transform=test_transforms)
 
-    # Veri yükleyicilerini oluştur
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
 
