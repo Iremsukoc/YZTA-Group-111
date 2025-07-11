@@ -1,0 +1,5 @@
+data_dir: ./data
+img_size: 224
+batch_size: 32
+epochs: 30
+model_path: ./models/saved_model.pth
