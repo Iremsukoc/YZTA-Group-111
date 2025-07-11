@@ -75,12 +75,10 @@ def train_model(model, train_loader, epochs, model_path, device):
         print(f"Epoch {epoch+1}/{epochs}, Loss: {epoch_loss:.4f}, Accuracy: {epoch_acc:.4f}, "
               f"Precision: {epoch_prec:.4f}, Recall: {epoch_rec:.4f}")
 
-        # En iyi modeli kaydet
         if epoch_acc > best_acc:
             best_acc = epoch_acc
             torch.save(model.state_dict(), model_path)
             print(f"Saved best model with accuracy: {best_acc:.4f}")
 
-    # Son modeli kaydet (isteğe bağlı)
     torch.save(model.state_dict(), model_path.replace('.pth', '_final.pth'))
     return history
