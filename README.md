@@ -71,7 +71,13 @@ Test the saved best model:
 ```bash
 python src/test_best_model.py
 ```
-- This loads `models/saved_model.pth` and evaluates it on the test set.
+*   This script loads `models/saved_model.pth` and evaluates it on the test set.
+  
+*   Evaluation results include accuracy, precision, recall, and confusion matrix.
+
+- You can download the best-performing model from the link below and place it under the models/ directory:
+
+ - [Download saved_model.pth](https://drive.google.com/file/d/13hQEPX7O3azxYCN58cjzwe4iwGbJaaT6/view?usp=drive_link)
 
 ### Visualize Predictions
 Visualize random predictions from the test set:
