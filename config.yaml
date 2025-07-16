@@ -1,0 +1,17 @@
+data:
+  train_dir: data/train/
+  val_dir: data/val/
+  test_dir: data/test/
+  batch_size: 32
+  num_workers: 4
+  img_size: 112
+
+model:
+  name: EfficientNetV2L
+  num_classes: 1
+
+train:
+  epochs: 50
+  learning_rate: 0.001
+  seed: 42
+  save_dir: models/
