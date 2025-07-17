@@ -42,8 +42,8 @@ The Melanoma Cancer Dataset contains skin lesion images for binary classificatio
 ## Installation
 
 ```bash
-git clone <repo_url>
-cd skin_classification
+git clone <https://github.com/Iremsukoc/YZTA-Bootcamp>
+cd ml-2.0.1/skin-cancer-image-classification
 python -m venv venv
 # On Windows:
 venv\Scripts\activate
