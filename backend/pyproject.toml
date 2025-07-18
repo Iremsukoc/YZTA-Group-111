@@ -6,16 +6,23 @@ authors = ["Sefa Sinanoğlu <sefasnngl@gmail.com>"]
 readme = "README.md"
 package-mode = false
 
+packages = [
+    { include = "app" }
+]
+
+
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.10,<3.13"
 fastapi = ">=0.116.0,<0.117.0"
 uvicorn = {extras = ["standard"], version = ">=0.35.0,<0.36.0"}
 pydantic = {extras = ["email"], version = ">=2.11.7,<3.0.0"}
 python-dotenv = ">=1.0.0,<2.0.0"
 firebase-admin = ">=6.9.0,<7.0.0"
+google-generativeai = ">=0.5.0,<1.0.0"
+
 
 [tool.poetry.scripts]
-start = "uvicorn main:app --reload"
+start = "app.main:main"
 
 [build-system]
 requires = ["poetry-core"]
