@@ -46,7 +46,7 @@ brain_tumor_classification/
 ### Installation
 1. Clone the repository or set up the project directory:
    ```bash
-   git clone <repository-url> 
+   git clone https://github.com/Iremsukoc/YZTA-Bootcamp 
    cd brain_tumor_classification
    ```
 2. Install dependencies:
