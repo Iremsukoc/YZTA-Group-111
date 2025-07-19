@@ -31,7 +31,7 @@ breast_cancer_project_pytorch/
 
 You can download the latest trained model checkpoint from the following link:
 
-[Download best_model.pth](https://your-download-link.com/best_model.pth)
+[Download best_model.pth](https://drive.google.com/drive/u/0/folders/1OU3mNz-kljmClaKpJAn0jaBxgWuXzpOE)
 
 Place the downloaded file in the `saved_model/` directory.
 
