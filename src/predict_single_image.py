@@ -7,21 +7,21 @@ from model import get_model
 from config import IMG_SIZE, CLASSES, DEVICE  # MODEL_PATH kaldırıldı!
 
 def predict_single_image():
-    print("Script başladı")
+    print("Script started")
 
-    # MODEL SEÇİMİ
+    # MODEL SELECTION
     model_dir = "saved_model"
     model_files = [f for f in os.listdir(model_dir) if f.endswith(".pth")]
 
-    print("\n Mevcut modeller:")
+    print("\n Available models:")
     for i, model_name in enumerate(model_files):
         print(f"{i}: {model_name}")
 
-    choice = int(input("\n Kullanmak istediğiniz modeli seçin (index girin): "))
+    choice = int(input("\n Select the model you want to use (enter index): "))
     MODEL_PATH = os.path.join(model_dir, model_files[choice])
-    print(f" Seçilen model: {MODEL_PATH}")
+    print(f" Selected model: {MODEL_PATH}")
 
-    # Dataset test dizini
+    # Test dataset directory
     dataset_root = os.path.join("data", "breast_cancer_dataset_split", "test")
 
     selected_class = random.choice(CLASSES)
@@ -33,18 +33,17 @@ def predict_single_image():
     ]
 
     if not image_files:
-        print("Uygun görüntü bulunamadı.")
+        print("No suitable image found.")
         return
 
     image_file = random.choice(image_files)
     image_path = os.path.join(class_path, image_file)
 
-    print(f"Seçilen sınıf: {selected_class}")
-    print(f"Görsel adı: {image_file}")
-    print(f"Dosya mevcut mu? {os.path.exists(image_path)}")
+    print(f"Selected class: {selected_class}")
+    print(f"Image name: {image_file}")
+    print(f"Does file exist? {os.path.exists(image_path)}")
 
     import matplotlib.pyplot as plt
-
 
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
@@ -54,43 +53,47 @@ def predict_single_image():
                              [0.5, 0.5, 0.5])
     ])
 
-    image = Image.open(image_path)
-    image = transform(image).unsqueeze(0).to(DEVICE)
+    pil_image = Image.open(image_path)
+    if not isinstance(pil_image, Image.Image):
+        pil_image = Image.open(image_path)
+    image_tensor = transform(pil_image)
+    if not isinstance(image_tensor, torch.Tensor):
+        raise TypeError('Transform did not return a tensor')
+    image_tensor = image_tensor.unsqueeze(0).to(DEVICE)
 
     model = get_model().to(DEVICE)
     model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
     model.eval()
 
-
     with torch.no_grad():
-        outputs = model(image)
+        outputs = model(image_tensor)
         if outputs is None:
-            print("❌ Model çıktı üretmedi.")
+            print("Model did not produce any output.")
             return
 
         _, pred = torch.max(outputs, 1)
 
         try:
-            predicted_class = CLASSES[pred.item()]
+            predicted_class = CLASSES[int(pred.item())]
         except Exception as e:
-            print(f"❌ CLASSES hatası: {e}")
+            print(f"CLASSES error: {e}")
             return
 
         probs = torch.nn.functional.softmax(outputs, dim=1)
 
-    print(" Sınıf olasılıkları:", probs.cpu().numpy())
-    print(f"\n Tahmin edilen sınıf: {predicted_class}")
-    print(f" Gerçek sınıf       : {selected_class}")
+    print(" Class probabilities:", probs.cpu().numpy())
+    print(f"\n Predicted class: {predicted_class}")
+    print(f" Actual class    : {selected_class}")
 
-    from llm_inference import get_llm_response  
-    llm_output = get_llm_response(predicted_class)
-    print("\n📘 LLM'den açıklama:")
-    print(llm_output)
-
+    # LLM explanation removed because llm_inference.py is deleted
+    # from llm_inference import get_llm_response  
+    # llm_output = get_llm_response(predicted_class)
+    # print("\nLLM explanation:")
+    # print(llm_output)
 
     img = Image.open(image_path)
     plt.imshow(img)
-    plt.title(f"Tahmin: {predicted_class}")
+    plt.title(f"Prediction: {predicted_class}")
     plt.axis('off')
     plt.show()
 

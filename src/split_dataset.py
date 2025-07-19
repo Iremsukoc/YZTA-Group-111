@@ -2,7 +2,7 @@ import os
 import shutil
 import random
 
-# Giriş ve çıkış klasörleri
+# Input and output directories
 SOURCE_DIR = r"C:\Users\muham\Downloads\breast_cancer_project_pytorch\breast_cancer_dataset\breast_cancer_project_ds\Dataset_BUSI_with_GT"
 TARGET_DIR = r"C:\Users\muham\Downloads\breast_cancer_project_pytorch\breast_cancer_dataset_split"
 CLASSES = ["benign", "malignant", "normal"]
@@ -27,7 +27,7 @@ def split_and_copy():
         images = [f for f in os.listdir(src_path) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
         total = len(images)
         if total == 0:
-            print(f" Uyarı: {cls} klasörü boş!")
+            print(f"Warning: {cls} folder is empty!")
             continue
 
         random.shuffle(images)
@@ -46,9 +46,9 @@ def split_and_copy():
                 dst_file = os.path.join(TARGET_DIR, split_name, cls, fname)
                 shutil.copy2(src_file, dst_file)
 
-        print(f"{cls}: Toplam {total} → train {len(splits['train'])}, val {len(splits['val'])}, test {len(splits['test'])}")
+        print(f"{cls}: Total {total} → train {len(splits['train'])}, val {len(splits['val'])}, test {len(splits['test'])}")
 
-    print(" Split işlemi tamamlandı.")
+    print(" Split operation completed.")
 
 if __name__ == "__main__":
     split_and_copy()

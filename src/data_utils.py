@@ -1,12 +1,12 @@
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from src.config import *
-from PIL import Image  # Burası çok önemli
+from PIL import Image  # This is very important
 
 def get_dataloaders():
     data_transforms = transforms.Compose([
     transforms.Resize((IMG_SIZE, IMG_SIZE)),
-    transforms.Lambda(lambda img: img.convert("RGB")), #Grayscale'den RGB'ye çeviriyor. 
+    transforms.Lambda(lambda img: img.convert("RGB")), #Converts from Grayscale to RGB.
     transforms.ToTensor(),
     transforms.Normalize([0.5, 0.5, 0.5],
                          [0.5, 0.5, 0.5])
