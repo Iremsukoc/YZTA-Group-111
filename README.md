@@ -1,6 +1,6 @@
 # Brain Tumor Classification
 
-This project implements a deep learning model to classify brain tumors into four categories (`glioma`, `meningioma`, `notumor`, `pituitary`) using the Kaggle "Brain Tumor MRI Dataset" with PyTorch. The model is a custom CNN designed for high accuracy on MRI images, leveraging GPU acceleration (e.g., NVIDIA RTX 4060).
+This project implements a deep learning model to classify brain tumors into four categories (`glioma`, `meningioma`, `notumor`, `pituitary`) using the Kaggle "Brain Tumor MRI Dataset" with PyTorch. The model is a custom CNN designed for high accuracy on MRI images, leveraging GPU acceleration (e.g., NVIDIA RTX 4060). **The project is also designed in accordance with MLOps best practices,** including experiment tracking and model management via MLflow.
 
 ## Project Overview
 - **Dataset**: [Brain Tumor MRI Dataset](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset)
