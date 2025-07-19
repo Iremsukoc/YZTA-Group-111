@@ -2,6 +2,8 @@
 
 A modular pipeline for skin cancer image classification using PyTorch, including data loading, preprocessing, model training, evaluation, and result saving.
 
+This project is developed according to MLOps best practices and uses MLflow for experiment tracking and model management.
+
 ---
 
 ## Project Structure
@@ -20,12 +22,49 @@ skin_classification/
 │   ├── model.py
 │   ├── prepare_data.py
 │   ├── preprocessing.py
+|   |-- mlflow_utils.py
 │   ├── train.py
 │   └── utils.py
+|-- start_mlflow_ui.py
 ├── requirements.txt   # Python dependencies
 ├── setup.py           # (Optional) For pip installability
 └── README.md          # Project documentation
 ```
+
+---
+
+## MLflow & MLOps
+
+This project leverages [MLflow](https://mlflow.org/) for experiment tracking, parameter logging, metric monitoring, and model registry as part of an MLOps-compliant workflow. With MLflow:
+- All training and validation metrics are automatically logged
+- Parameters and model weights are tracked
+- Experiments can be easily compared
+- The best models are versioned and managed in the model registry
+
+You can visualize and analyze your experiment history using the MLflow UI.
+
+### MLflow Usage
+
+1. MLflow runs automatically during training:
+   ```bash
+   python src/train.py --config configs/config.yaml
+   ```
+2. To launch the MLflow UI:
+   ```bash
+   python start_mlflow_ui.py
+   ```
+   or
+   ```bash
+   mlflow ui --backend-store-uri sqlite:///mlflow.db
+   ```
+   Access the UI at: http://localhost:5000
+3. Use utility scripts to manage experiments and models:
+   ```bash
+   python src/mlflow_utils.py --action list_experiments
+   python src/mlflow_utils.py --action list_runs --experiment skin_cancer_classification
+   python src/mlflow_utils.py --action compare --experiment skin_cancer_classification
+   python src/mlflow_utils.py --action plot --experiment skin_cancer_classification
+   ```
 
 ---
 
@@ -42,8 +81,8 @@ The Melanoma Cancer Dataset contains skin lesion images for binary classificatio
 ## Installation
 
 ```bash
-git clone <https://github.com/Iremsukoc/YZTA-Bootcamp>
-cd ml-2.0.1/skin-cancer-image-classification
+git clone <repo_url>
+cd skin_classification
 python -m venv venv
 # On Windows:
 venv\Scripts\activate
