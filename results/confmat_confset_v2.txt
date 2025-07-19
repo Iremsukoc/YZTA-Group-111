@@ -1,6 +1,0 @@
-[confmat_confset_v2.png]
-→ Model: saved_model/best_model_confset_v2.pth
-→ Data augment: src/data_utils_confset_v2.py.py
-→ Accuracy: 0.8458
-→ F1-score: 0.8460
-→ Tarih: 2025-07-05
