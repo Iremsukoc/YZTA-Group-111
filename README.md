@@ -46,8 +46,8 @@ brain_tumor_classification/
 ### Installation
 1. Clone the repository or set up the project directory:
    ```bash
-   git clone <https://github.com/Iremsukoc/YZTA-Bootcamp> 
-   cd ml-2.0.1/brain-tumor-image-classification
+   git clone <repository-url> 
+   cd brain_tumor_classification
    ```
 2. Install dependencies:
    ```bash
@@ -71,13 +71,7 @@ Test the saved best model:
 ```bash
 python src/test_best_model.py
 ```
-*   This script loads `models/saved_model.pth` and evaluates it on the test set.
-  
-*   Evaluation results include accuracy, precision, recall, and confusion matrix.
-
-- You can download the best-performing model from the link below and place it under the models/ directory:
-
- - [Download saved_model.pth](https://drive.google.com/file/d/13hQEPX7O3azxYCN58cjzwe4iwGbJaaT6/view?usp=drive_link)
+- This loads `models/saved_model.pth` and evaluates it on the test set.
 
 ### Visualize Predictions
 Visualize random predictions from the test set:
@@ -106,4 +100,27 @@ model_path: ./models/saved_model.pth
 *  For progress bars during training, the code supports tqdm (install via requirements.txt).
 
 *  AUC (ROC-AUC) is optional for multiclass classification; F1 Score (micro) is recommended for imbalanced datasets.
+
+## Experiment Tracking with MLflow
+
+This project integrates MLflow for experiment tracking. During training, parameters, metrics, and models are automatically logged to MLflow.
+
+### How to Use MLflow
+
+MLflow runs automatically during training. At the end of training, all parameters, per-epoch metrics, and the best/final models are logged as MLflow artifacts.
+
+To launch the MLflow UI, run:
+```bash
+mlflow ui
+```
+Then open [http://localhost:5000](http://localhost:5000) in your browser.
+
+### What Gets Logged
+- Training parameters (optimizer, learning rate, number of epochs, model path, device)
+- Per-epoch metrics: loss, accuracy, precision, recall
+- Best and final PyTorch models (under artifacts)
+
+### Notes
+- MLflow experiment data is stored in the `mlruns/` directory by default.
+- You can compare runs, parameters, and metrics visually in the MLflow UI.
   
