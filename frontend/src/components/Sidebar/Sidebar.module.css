@@ -1,0 +1,124 @@
+.sidebar {
+  background-color: #ffffff;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  height: calc(100vh - 48px);
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobileOverlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileSidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 1001;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileSidebar.open {
+  transform: translateX(0);
+}
+
+.closeButtonContainer {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.closeButton img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Ortak stiller (hem mobil hem masaüstü) */
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4A90E2;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.navItem a {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #7A86A1;
+  font-weight: 500;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.navItem a:hover {
+  background-color: #f4f7fe;
+  color: #4A90E2;
+}
+
+.navItem a.active {
+  background-color: #4A90E2;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.navItem a.active .icon {
+  filter: brightness(0) invert(1);
+}
+
+.icon {
+  margin-right: 15px;
+  width: 20px;
+  height: 20px;
+}
+
+.footer {
+  margin-top: auto;
+}

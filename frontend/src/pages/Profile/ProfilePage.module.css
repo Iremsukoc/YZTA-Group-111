@@ -1,0 +1,174 @@
+/* ProfilePage.module.css */
+.profileContainer {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eef2f9;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #eef3ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #4A90E2;
+}
+
+.userInfo h2 {
+  margin: 0 0 5px 0;
+  font-size: 22px;
+  color: #2c3e50;
+}
+
+.userInfo p {
+  margin: 0;
+  color: #7A86A1;
+}
+
+.tabs {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.tabs a {
+  text-decoration: none;
+  color: #7A86A1;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tabs a:hover {
+  color: #4A90E2;
+}
+
+.tabs a.active {
+  color: #4A90E2;
+  border-bottom-color: #4A90E2;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #34495e;
+}
+
+.formInput {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #dce1f0;
+  background-color: #f9fafc;
+  font-size: 16px;
+}
+
+.formActions {
+  grid-column: 2 / 3;
+  text-align: right;
+  margin-top: 15px;
+}
+
+.saveButton {
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.deleteSection {
+  margin-top: 50px;
+  padding: 20px 25px;
+  border-radius: 12px;
+  border: 1px solid #f5c6cb;
+  background-color: #f8d7da1a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.deleteSection h3 {
+  margin: 0 0 5px 0;
+  color: #c0392b;
+}
+
+.deleteInfo p {
+  margin: 0;
+  color: #721c24;
+  font-size: 14px;
+}
+
+.deleteButton {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 20px;
+  transition: background-color 0.2s;
+}
+
+.deleteButton:hover {
+  background-color: #a93226;
+}
+
+@media (max-width: 768px) {
+  .profileContainer {
+    padding: 20px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formActions {
+    grid-column: 1;
+    text-align: center;
+  }
+  
+  .saveButton {
+    width: 100%;
+  }
+
+  .deleteSection {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  .deleteInfo p {
+    font-size: 13px;
+  }
+}

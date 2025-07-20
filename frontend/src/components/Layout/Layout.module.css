@@ -1,0 +1,56 @@
+.appContainer {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  background-color: #f4f7fe;
+}
+
+.mainContentWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.mobileHeader {
+  display: none;
+  background-color: #ffffff;
+  padding: 15px 20px;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+.mobileHeader .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4A90E2;
+}
+
+.hamburgerButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburgerButton img {
+  width: 28px;
+  height: 28px;
+}
+
+
+@media (max-width: 992px) {
+  .appContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .mobileHeader {
+    display: flex; 
+  }
+}
