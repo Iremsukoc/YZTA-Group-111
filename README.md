@@ -1,118 +1,145 @@
-# Kanser Tespit Sistemi: Backend ve Frontend Entegrasyonu
+# Kanser Tespit Sistemi
 
-Bu proje, çeşitli kanser türlerinin (beyin, meme, cilt, kolon, lösemi, akciğer) görüntü tabanlı tespiti için derin öğrenme modelleri içeren bir backend ve buna bağlanabilen bir frontend arayüzü geliştirmeyi amaçlar.
+Bu proje, çeşitli kanser türlerinin (beyin, meme, cilt) görüntü tabanlı tespiti için derin öğrenme modelleri içeren bir sistemdir.
 
-## İçerik
-- [Gereksinimler](#gereksinimler)
-- [Kurulum](#kurulum)
-- [Backend Çalıştırma](#backend-calistirma)
-- [Frontend ile Entegrasyon](#frontend-ile-entegrasyon)
-- [API Kullanımı](#api-kullanimi)
-- [Notlar](#notlar)
+## Proje Yapısı
 
----
+### Ana Bileşenler
+
+#### `predict_system.py` - Ana Tahmin Sistemi
+- **Görevi**: Tüm kanser türleri için tek bir arayüz sağlar
+- **Özellikler**:
+  - 3 farklı kanser türü için model yükleme (brain, breast, skin)
+  - GPU/CPU desteği
+  - Tek resim ve batch tahmin
+  - Otomatik transform uygulama
+
+#### Kanser Türleri ve Modeller
+
+**1. Beyin Tümörü (Brain Tumor)**
+- **Model**: `brain_tumor/saved_model.pth`
+- **Sınıflar**: glioma, meningioma, notumor, pituitary
+- **Transform**: 224x224 resize, ImageNet normalization
+- **Utils**: `brain_tumor/utils.py`
+
+**2. Meme Kanseri (Breast Cancer)**
+- **Model**: `breast_cancer/breast_cancer_model.pth`
+- **Sınıflar**: benign, malignant, normal
+- **Transform**: 224x224 resize, RGB conversion, [-0.5, 0.5] normalization
+- **Utils**: `breast_cancer/utils.py`
+
+**3. Cilt Kanseri (Skin Cancer)**
+- **Model**: `skin_cancer/best_model.pth`
+- **Sınıflar**: Benign, Malignant (binary classification)
+- **Transform**: 112x112 resize, ImageNet normalization
+- **Utils**: `skin_cancer/src/preprocessing.py`
+
+### Test Veri Havuzu
+
+#### `test_data_pool/` - Test Veri Setleri 
+Her kanser türü için ayrı test verileri:
+```
+test_data_pool/
+├── brain/
+│   ├── glioma/
+│   ├── meningioma/
+│   ├── notumor/
+│   └── pituitary/
+├── breast/
+│   ├── benign/
+│   ├── malignant/
+│   └── normal/
+└── skin/
+    ├── Benign/
+    └── Malignant/
+```
+
+Veri setini indirin: [test_data_pool](https://drive.google.com/drive/folders/1k88jlPUf1HriIbUC6KQzyna3vAAfJOik)
+
+### Transform İşlemleri
+
+Her kanser türü için özel transform'lar uygulanır:
+
+**Brain Tumor:**
+```python
+transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+])
+```
+
+**Breast Cancer:**
+```python
+transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.Lambda(lambda img: img.convert("RGB")),  # Grayscale to RGB
+    transforms.ToTensor(),
+    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+])
+```
+
+**Skin Cancer:**
+```python
+transforms.Compose([
+    transforms.Resize((112, 112)),
+    transforms.CenterCrop((112, 112)),
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+])
+```
+
+## Kullanım
+
+### Tek Resim Tahmini
+```python
+predictor = CancerPredictor(device='cuda')
+result = predictor.predict_single_image('image.jpg', 'brain')
+print(f"Tahmin: {result['predicted_class']}, Güven: {result['confidence']}%")
+```
+
+### Batch Tahmin
+```python
+results = predictor.batch_predict('skin', num_images=5)
+for result in results:
+    print(f"{result['image_path']} → {result['predicted_class']}")
+```
+
+### Test Veri Havuzundan Rastgele Örnekler
+```python
+test_images = predictor.get_random_test_images('breast', num_images=3)
+```
 
 ## Gereksinimler
-- Python 3.8+
-- CUDA destekli GPU ve uygun CUDA sürücüleri (GPU ile çalışmak için)
-- pip
-- (Varsa) Frontend için Node.js ve npm/yarn
 
 ### Python Kütüphaneleri
-Backend için gerekli kütüphaneler `requirements.txt` dosyalarında belirtilmiştir. Ana kütüphaneler:
-- torch (PyTorch)
-- torchvision
-- numpy
-- pillow
-- matplotlib
-- pyyaml
-
-## Kurulum
-1. **Depoyu klonlayın:**
-   ```bash
-   git clone <proje-linki>
-   cd documention
-   ```
-2. **Gerekli Python kütüphanelerini yükleyin:**
-   ```bash
-   pip install -r bootcamp/bootcamp/colon-cancer-detector/requirements.txt
-   pip install -r bootcamp/bootcamp/leukemia-classifier/requirements.txt
-   pip install -r bootcamp/bootcamp/lung_cancer_project/requirements.txt
-   # Ana dizinde ek olarak
-   pip install torch torchvision numpy pillow matplotlib pyyaml
-   ```
-3. **CUDA kurulumu:**
-   - CUDA ve cuDNN sürücülerinizin yüklü olduğundan emin olun.
-   - PyTorch'un CUDA destekli sürümünü yükleyin: https://pytorch.org/get-started/locally/
-
-## Backend Çalıştırma
-Backend, Python tabanlıdır ve REST API olarak sunulabilir. Önerilen yol FastAPI veya Flask ile bir API servisi oluşturmaktır.
-
-### Örnek FastAPI Sunucusu
-1. **FastAPI ve Uvicorn yükleyin:**
-   ```bash
-   pip install fastapi uvicorn
-   ```
-2. **Basit bir API dosyası oluşturun (ör: `api_server.py`):**
-   ```python
-   from fastapi import FastAPI, UploadFile, File, Form
-   from predict_system import CancerPredictor
-   import shutil
-   import os
-
-   app = FastAPI()
-   predictor = CancerPredictor(device='cuda')
-
-   @app.post("/predict/")
-   async def predict(cancer_type: str = Form(...), file: UploadFile = File(...)):
-       temp_path = f"temp_{file.filename}"
-       with open(temp_path, "wb") as buffer:
-           shutil.copyfileobj(file.file, buffer)
-       result = predictor.predict_single_image(temp_path, cancer_type)
-       os.remove(temp_path)
-       return result
-   ```
-3. **API'yi başlatın:**
-   ```bash
-   uvicorn api_server:app --reload
-   ```
-   - API varsayılan olarak `http://127.0.0.1:8000` adresinde çalışır.
-   - `/docs` adresinden Swagger arayüzü ile test edebilirsiniz.
-
-## Frontend ile Entegrasyon
-Frontend, React, Vue, Angular veya başka bir framework ile geliştirilebilir. Temel olarak, kullanıcıdan resim ve kanser türü alıp, backend'e POST isteği gönderir.
-
-### Örnek İstek (JavaScript/React):
-```js
-const formData = new FormData();
-formData.append('cancer_type', 'skin');
-formData.append('file', selectedFile);
-
-fetch('http://127.0.0.1:8000/predict/', {
-  method: 'POST',
-  body: formData
-})
-  .then(res => res.json())
-  .then(data => console.log(data));
+```bash
+pip install torch torchvision numpy pillow matplotlib pyyaml
 ```
-- `selectedFile` kullanıcının yüklediği dosyadır.
-- `cancer_type` değerleri: `brain`, `breast`, `skin` (gerekirse diğerleri eklenebilir)
 
-## API Kullanımı
-- **Endpoint:** `/predict/`
-- **Yöntem:** `POST`
-- **Parametreler:**
-  - `cancer_type`: (string) Kanser türü (`brain`, `breast`, `skin` ...)
-  - `file`: (image) Yüklenecek resim dosyası
-- **Dönüş:**
-  - Tahmin edilen sınıf, güven skoru ve varsa olasılıklar
+### GPU Desteği
+CUDA destekli GPU için:
+```bash
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+```
+
+## Model Dosyaları
+
+Her model için gerekli dosyalar:
+- **Brain**: `brain_tumor/saved_model.pth`
+- **Breast**: `breast_cancer/breast_cancer_model.pth`
+- **Skin**: `skin_cancer/best_model.pth`
+
+
+Model dosyalarını indirin: [Model dosyaları](https://drive.google.com/drive/folders/1k88jlPUf1HriIbUC6KQzyna3vAAfJOik)
 
 ## Notlar
-- Model dosyalarının ve test görsellerinin doğru dizinlerde olduğundan emin olun.
-- GPU kullanılacaksa CUDA sürücülerinizin ve PyTorch CUDA sürümünün uyumlu olması gerekir.
-- Geliştirme ve test için backend'i önce başlatın, ardından frontend'den istek gönderin.
-- Gerekirse API endpointlerini frontend projesinde `.env` dosyası ile yönetebilirsiniz.
+
+- Modeller GPU'da çalışmak üzere optimize edilmiştir
+- Test verileri `test_data_pool/` klasöründe organize edilmiştir
+- Her kanser türü için özel transform'lar uygulanır
+- Binary (skin) ve multi-class (brain, breast) sınıflandırma desteklenir
 
 ---
 
-Herhangi bir sorunda veya geliştirme ihtiyacında proje yöneticisine veya geliştirici ekibe ulaşabilirsiniz. 
+Bu sistem, farklı kanser türleri için tutarlı bir tahmin arayüzü sağlar ve her model için optimize edilmiş transform'lar kullanır. 
