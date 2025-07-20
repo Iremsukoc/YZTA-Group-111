@@ -138,14 +138,14 @@ ied cancer type.
 <br></br>
 
 <details>
-<summary><strong style="font-size:2em">📋 Sprint 1</strong></summary>
+<summary><strong style="font-size:4em">📋 Sprint 1</strong></summary>
 
 ### **Sprint Duration**
 June 23, 2025 (Monday) - July 6, 2025 (Sunday) *(Two weeks)*
 
 ---
 
-<details><summary><strong style="font-size:1.2em">Sprint Notes</strong></summary>
+<details><summary><strong style="font-size:2em">Sprint Notes</strong></summary>
 
 #### Completed
 - Frontend development was completed faster than planned.  
@@ -180,14 +180,14 @@ June 23, 2025 (Monday) - July 6, 2025 (Sunday) *(Two weeks)*
 
 ---
 
-<details><summary><strong style="font-size:1.2em">Estimated Completion Points</strong></summary>
-**67 points**
+<details><summary><strong style="font-size:2em">Estimated Completion Points</strong></summary>
+<strong>67 points</strong>
 </details>
 
 ---
 
-<details><summary><strong style="font-size:1.2em">Estimation Logic</strong></summary>
-Sprint task estimation was based on **hour-based workload** estimates using the following methodology:
+<details><summary><strong style="font-size:2em">Estimation Logic</strong></summary>
+Sprint task estimation was based on <strong>hour-based workload</strong> estimates using the following methodology:
 
 | **Estimated Time** | **Story Points** |
 |:------------------:|:----------------:|
@@ -207,7 +207,7 @@ Consequently, task time estimates and point allocation were prepared considering
 
 ---
 
-<details><summary><strong style="font-size:1.2em">Sprint Tasks</strong></summary>
+<details><summary><strong style="font-size:2em">Sprint Tasks</strong></summary>
 
 #### **Design (7 points)**
 - Login, Signup, Main Page, Profile Pages, and Dashboard designs (additional support pop-up screen was designed)
@@ -236,7 +236,7 @@ Consequently, task time estimates and point allocation were prepared considering
 
 ---
 
-<details><summary><strong style="font-size:1.2em">Daily Scrum</strong></summary>
+<details><summary><strong style="font-size:2em">Daily Scrum</strong></summary>
 
 Initially, WhatsApp was used for Daily Scrum notifications and tracking. However, to ensure a more organized and manageable process, we transitioned to using Google Forms. The final form (shown below) was created, and reminder messages were sent via WhatsApp to each team member to complete the form daily.
 
@@ -256,7 +256,7 @@ Responses submitted through the form are automatically collected and stored in a
 
 ---
 
-<details><summary><strong style="font-size:1.2em">Sprint Board Screenshots</strong></summary>
+<details><summary><strong style="font-size:2em">Sprint Board Screenshots</strong></summary>
 
 Throughout the sprint, the team used Asana to track the progress of all tasks, monitor their current status, and ensure alignment with the sprint goals.  
 Below are the screenshots of the sprint board at different stages to illustrate how tasks were organized, assigned, and moved across columns (e.g., To Do, In Progress, Done).
@@ -274,7 +274,7 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 ---
 
-<details><summary><strong style="font-size:1.2em">Product Progress Screenshots</strong></summary>
+<details><summary><strong style="font-size:2em">Product Progress Screenshots</strong></summary>
 
 ---
 
@@ -308,7 +308,7 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 ![Machine Model Result](docs-images/sprint-1/product/ml/ml-breast-cancer-result.png)
 
-![Machine Model Confusion Matrix](docs-images/sprint-1/product/ml/confusion-matrix.jpg)
+![Machine Model Confusion Matrix](docs-images/sprint-1/product/ml/ml-breast-cancer-confusion-matrix.jpg)
 
 </details>
 
@@ -326,7 +326,7 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 ---
 
-<details><summary><strong style="font-size:1.2em">Sprint Review</strong></summary>
+<details><summary><strong style="font-size:2em">Sprint Review</strong></summary>
 The planned work for this sprint was successfully completed:
 
 - While Login, Signup, and Main Page designs were initially planned to be created on Figma, due to rapid frontend development progress, Profile and Dashboard page designs were also completed and revised
@@ -341,7 +341,7 @@ The planned work for this sprint was successfully completed:
 ---
 
 <details>
-<summary><strong style="font-size:1.2em">Sprint Retrospective</strong></summary>
+<summary><strong style="font-size:2em">Sprint Retrospective</strong></summary>
 
 ### What Went Well
 
@@ -377,7 +377,7 @@ The planned work for this sprint was successfully completed:
 ---
 
 <details>
-<summary><strong style="font-size:1.2em">Communication and Project Management Tools</strong></summary>
+<summary><strong style="font-size:2em">Communication and Project Management Tools</strong></summary>
 
 - **Code Management:** All code repositories are managed on GitHub, with version control in place. The development process is tracked through pull requests.
 
@@ -389,4 +389,262 @@ The planned work for this sprint was successfully completed:
 
 - **Weekly Meetings:** During the meetings, team members share what they have done, any problems they are facing, what they plan to do next, and what actions they will take before the next meeting. These online meetings are held twice a week (Mondays at 22:00 and Fridays at 22:00) via Google Meet.
 
+</details>
 
+</details>
+
+
+
+
+
+<details>
+<summary><strong style="font-size:4em">📋 Sprint 2</strong></summary>
+
+### **Sprint Duration**
+July 7, 2025 (Monday) - July 20, 2025 (Sunday) *(Two weeks)*
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Notes</strong></summary>
+
+#### Completed
+- The implementation of new pages were successfully completed. The assigned team member also took the initiative to design and develop additional pages such as FAQ and History, which were listed in the side navigation but not initially planned within the sprint scope.
+- The project structure was reorganized into a more modular form. Since the frontend implementation of the login process was necessary for backend testing, corresponding login functionalities were also developed and integrated into the backend. Additionally, critical endpoints for connecting with the Large Language Model (LLM) were implemented.
+- Machine learning models targeting various types of cancer were successfully developed. During this sprint, image classification models were trained to detect colon, lung, and leukemia cancers.
+Furthermore, data transformation and prediction methods were implemented in Python to support the deployment of these models. As a result, the foundational logic required for integrating the models with backend services has been established.
+
+---
+
+#### Challenges Encountered
+- Although frontend testing has started, progress has been slower than expected.
+- The LLM integration, which is essential for enabling detailed analysis, has not yet been completed.
+- While initial efforts to connect ML models with backend services have begun, full integration and testing for even a single model have not yet been achieved.
+
+---
+
+#### Solutions
+- Since the development of ML models has been completed, the related team members will be reassigned to accelerate backend development efforts.
+- To support the LLM development process, a team member will be assigned to assist and coordinate regular technical meetings to ensure progress and alignment.
+
+---
+
+#### Lessons Learned
+- Proactively taking initiative beyond assigned tasks contributed positively to sprint outcomes and overall product quality.
+- Early identification of integration dependencies, especially between ML models and backend services, is crucial to avoid last-minute delays.
+- Regular and structured communication, including consistent meeting participation, significantly improved task tracking and team alignment.
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Estimated Completion Points</strong></summary>
+<strong>86 points</strong>
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Estimation Logic</strong></summary>
+Sprint task estimation was based on <strong>hour-based workload</strong> estimates using the following methodology:
+
+| **Estimated Time** | **Story Points** |
+|:------------------:|:----------------:|
+| 1 day (8 hours) | 4 |
+| Half day (4 hours) | 2 |
+| 2 hours | 1 |
+| 1 hour and below | 0.5 |
+
+Due to team members' various responsibilities such as internships and work commitments, weekday working hours were expected to be more limited while weekends would be more intensive. Therefore, task time estimates and point allocation were planned considering this balance:
+
+- **Weekdays:** Typically 1-2 hour work blocks were planned
+- **Weekends:** Longer focused work sessions (4-5 hours) were targeted
+
+Consequently, task time estimates and point allocation were prepared considering this balance, and the sprint target was set at **67 points** total.
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Tasks</strong></summary>
+
+#### **Design (2 points)**
+- Completed logo design.
+
+#### **Frontend (8 points)**
+- Developed dashboard and profile page designs using React and Vite.js.
+- Implemented with a responsive (mobile-friendly) and modular structure.
+
+#### **Backend (8 points)**
+- Reorganized the project folder structure and configured scripts to run using Poetry.
+- Designed the structure for initializing and storing chat sessions within the General Test context. 
+- Integrated the LLM created for the General Test with the backend.
+- Tested all endpoints via Postman and added .md documentation files to support understanding for other team members.
+
+#### **Language Model and Machine Learning**
+**Machine Learning  (ML) - 60 points:**
+- Developed image classification models for the following cancer types. Suitable datasets were sourced, models were trained and tested, and necessary data transformation and prediction methods were implemented in Python:
+  - Colon Cancer
+  - Lung Cancer
+  - Leukemia (Blood Cancer)
+  - Brain Tumor
+  - Skin Cancer
+
+**Language Model (LLM) - 8 points:**
+- Initiated the creation and testing of LLM prompt to enable detailed analysis, particularly tailored for the cancer types covered by the ML models. The work is still in progress and will be continued in the next sprint.
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Daily Scrum</strong></summary>
+
+The daily scrum process, conducted via Google Form, was continued in this sprint because it had yielded high efficiency in previous sprint. Team members were encouraged to complete the forms daily with reminders sent via WhatsApp.
+
+**WhatsApp Screenshots:**  
+![WhatsApp Daily Scrum - 1](docs-images/sprint-1/daily-scrum/daily-scrum-wp-sprint2-1.png)
+
+**Google Form Screenshot:**  
+![Google Form Daily Scrum](docs-images/sprint-1/daily-scrum/daily-scrum-google-form.png)
+
+![Google Form Daily Scrum Responses](docs-images/sprint-1/daily-scrum/daily-scrum-google-form-response-sprint2-1.png)
+
+![Google Form Daily Scrum Responses 2](docs-images/sprint-1/daily-scrum/daily-scrum-google-form-response-sprint2-2.png)
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Board Screenshots</strong></summary>
+
+Throughout the sprint, the team used Asana to track the progress of all tasks, monitor their current status, and ensure alignment with the sprint goals.  
+Below are the screenshots of the sprint board at different stages to illustrate how tasks were organized, assigned, and moved across columns (e.g., To Do, In Progress, Done).
+
+**Sprint Board Screenshots:**  
+
+![Sprint Board - 1](docs-images/sprint-1/sprint-board/sprint-board-sprint2-1.png)
+
+![Sprint Board - 2](docs-images/sprint-1/sprint-board/sprint-board-sprint2-2.png)
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Product Progress Screenshots</strong></summary>
+
+---
+
+<details><summary><strong style="font-size:1em">Frontend</strong></summary>
+
+![Dasboard Page](docs-images/sprint-1/product/frontend/dasboard-page.png)
+
+![Profile Page - 1](docs-images/sprint-1/product/frontend/profile-page-1.png)
+
+![Profile Page - 2](docs-images/sprint-1/product/frontend/profile-page-2.png)
+
+![Reports Page](docs-images/sprint-1/product/frontend/reports-page.png)
+
+![FAQ Page](docs-images/sprint-1/product/frontend/faq-page.png)
+
+![FAQ Page](docs-images/sprint-1/product/frontend/support-pop-up.png)
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:1em">Backend</strong></summary>
+
+![Start Chat Session](docs-images/sprint-1/product/backend/start-chat-session.png)
+
+![Send Chat Message - 1](docs-images/sprint-1//product/backend/send-chat-message-1.png)
+
+![Send Chat Message - 2](docs-images/sprint-1/product/backend/send-chat-message-2.png)
+
+![Het Chat History](docs-images/sprint-1/product/backend/get-chat-history.png)
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:1em">Machine Model</strong></summary>
+
+---
+Colon Cancer : 
+
+![Machine Model Colon Cancer Classification Report](docs-images/sprint-1/product/ml/ml-colon-cancer-classification-report.png)
+
+![Machine Model Colon Cancer Confusion Matrix](docs-images/sprint-1/product/ml/ml-colon-cancer-confusion-matrix.png)
+
+---
+Skin Cancer :
+
+![Machine Model Skin Cancer Classification Report](docs-images/sprint-1/product/ml/ml-skin-cancer-classification-report.png)
+
+![Machine Model Skin Cancer Confusion Matrix](docs-images/sprint-1/product/ml/ml-skin-cancer-confusion-matrix.png)
+
+</details>
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Review</strong></summary>
+The planned work for this sprint was largely completed, with notable progress and initiative shown across multiple areas:
+
+- While only core pages were initially scoped, additional pages like FAQ and History were also designed and implemented, enhancing UI consistency and completeness.
+- Backend architecture was refactored into a modular structure.
+- LLM-related endpoints were created, allowing the system to begin communication with the language model.  
+- Machine learning models for five different cancer types — Colon, Lung, Leukemia (Blood Cancer), Brain Tumor, and Skin Cancer — were successfully trained and tested. Supporting Python methods for prediction and data transformation were also developed to facilitate backend integration.
+- The team continued to improve coordination and cross-functional collaboration, aligning efforts across frontend, backend, and ML tasks to increase efficiency.
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Retrospective</strong></summary>
+
+### What Went Well
+- The training and evaluation of ML models progressed exceptionally well. In just a short two-week sprint, datasets for **five different cancer types** (Colon, Lung, Leukemia, Brain Tumor, and Skin Cancer) were collected, preprocessed, and used to successfully train image classification models. Overfitting issues were resolved during training, and corresponding data transformation and prediction methods were implemented in Python, laying a solid foundation for integration.
+- Although not originally planned for this sprint, FAQ and Report pages were both designed and implemented on the frontend, showing strong initiative and ownership from the responsible team member.
+- Initial integration steps were taken with the LLM, including the implementation of basic communication and session-handling logic on the backend. While limited in scope, this progress marked an important step toward system-wide functionality.
+
+---
+
+### What Went Badly
+- The LLM prompt for the Detailed Analysis module was expected to be finalized in this sprint but was delayed due to the availability constraints of the assigned team member.
+- UI testing remains insufficient; despite some manual tests, automated test coverage is still lacking and needs to be prioritized.
+- Integration efforts — especially between ML models and the backend — progressed slower than necessary. Not a single full end-to-end connection (ML → Backend → Frontend) was completed during this sprint.
+
+---
+
+### Areas for Improvement
+- Integration efforts should be initiated earlier in the sprint cycle, particularly when multiple teams or components (e.g., ML, backend, frontend) are involved. Delaying these steps creates avoidable dependencies near sprint-end.
+- Task planning must better reflect realistic availability of contributors, especially for components requiring specialized domain knowledge (e.g., LLM).
+- More frequent cross-functional checkpoints should be scheduled to ensure blockers in one part of the stack are surfaced early and resolved quickly.
+- Tasks were distributed without actively monitoring emerging bottlenecks during the sprint. There should be a mechanism to reassign available team members to support areas that are falling behind, especially for integration-critical tasks.
+
+---
+
+### Next Sprint Tasks
+- Finalize and validate the LLM prompt for Detailed Analysis, enabling advanced text-based interpretations for the supported cancer types.
+- Begin full ML–Backend integration, starting with one cancer model and expanding gradually. Create endpoints that allow the frontend to request predictions.
+- Implement the Frontend–Backend connection for prediction features, especially for pages like Report that will display model results.
+
+</details>
+
+---
+
+<details>
+<summary><strong style="font-size:2em">Communication and Project Management Tools</strong></summary>
+
+- **Code Management:** All code repositories are managed on GitHub, with version control in place. The development process is tracked through pull requests.
+
+- **Project Management:** Task assignments and sprint tracking are carried out via the Asana platform.
+
+- **Team Communication:** Instant communication within the team is facilitated through WhatsApp.
+
+- **Daily Progress Tracking:**  Daily reporting is conducted through Google Forms. Each team member fills out a short form at the end of the day to report completed work and any encountered blockers.
+
+- **Weekly Meetings:** During the meetings, team members share what they have done, any problems they are facing, what they plan to do next, and what actions they will take before the next meeting. These online meetings are held twice a week (Mondays at 22:00 and Fridays at 22:00) via Google Meet.
+
+</details>
+
+</details>
