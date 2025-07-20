@@ -108,7 +108,7 @@ ied cancer type.
       </td>
     </tr>
     <tr>
-      <td>Cemre Üstün</td>
+      <td>Cerem Üstün</td>
       <td>Developer</td>
       <td>
         <a href="https://github.com/ceremustun" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20" height="20"/></a>
@@ -124,7 +124,7 @@ ied cancer type.
       </td>
     </tr>
     <tr>
-      <td>Sefa Sinanoğlu</td>
+      <td>Muhammed Sefa Sinanoğlu</td>
       <td>Developer</td>
       <td>
         <a href="https://github.com/Sinngl" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20" height="20"/></a>
