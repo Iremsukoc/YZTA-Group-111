@@ -458,7 +458,7 @@ Due to team members' various responsibilities such as internships and work commi
 - **Weekdays:** Typically 1-2 hour work blocks were planned
 - **Weekends:** Longer focused work sessions (4-5 hours) were targeted
 
-Consequently, task time estimates and point allocation were prepared considering this balance, and the sprint target was set at **67 points** total.
+Consequently, task time estimates and point allocation were prepared considering this balance, and the sprint target was set at **86 points** total.
 
 </details>
 
