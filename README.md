@@ -54,7 +54,7 @@ test_data_pool/
     └── Malignant/
 ```
 
-Veri setini indirin: [test_data_pool](https://drive.google.com/drive/folders/1k88jlPUf1HriIbUC6KQzyna3vAAfJOik)
+Veri setini indirin: [test_data_pool](https://drive.google.com/drive/folders/1MWCyP-nj-gzxZYCW2IXNa7OOFbv7t3Yf)
 
 ### Transform İşlemleri
 
@@ -131,7 +131,7 @@ Her model için gerekli dosyalar:
 - **Skin**: `skin_cancer/best_model.pth`
 
 
-Model dosyalarını indirin: [Model dosyaları](https://drive.google.com/drive/folders/1k88jlPUf1HriIbUC6KQzyna3vAAfJOik)
+Model dosyalarını indirin: [Model dosyaları](https://drive.google.com/drive/folders/1q1Mh068hp4trI5pDPolN6GOBJYL4qqs7)
 
 ## Notlar
 
