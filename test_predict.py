@@ -7,8 +7,8 @@ from tensorflow.keras.preprocessing import image
 
 # ==== KLASÖR YOLLARI ====
 TEST_DIRS = {
-    'Colon_adenocarcinoma': 'data/colon_image_sets/Colon_adenocarcinoma',
-    'Colon_benign_tissue': 'data/colon_image_sets/Colon_benign_tissue'
+    'Colon_adenocarcinoma': 'test_split_colon/Colon_adenocarcinoma',
+    'Colon_benign_tissue': 'test_split_colon/Colon_benign_tissue'
 }
 
 # ==== MODEL VE GÖRSEL AYARLARI ====
