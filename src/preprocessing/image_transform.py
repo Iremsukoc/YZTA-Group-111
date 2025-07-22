@@ -1,38 +1,38 @@
 import numpy as np
 import cv2
+from PIL import Image
 
 def preprocess_single_image(image_path, target_size=(128, 128), color_mode='grayscale'):
     """
-    Verilen tek bir görseli modeli beslemek için uygun formata getirir.
-    
-    Args:
-        image_path (str): Görselin dosya yolu
-        target_size (tuple): Beklenen boyut (yükseklik, genişlik)
-        color_mode (str): 'grayscale' veya 'rgb'
-
-    Returns:
-        np.array: Hazır girdi (model.predict'e verilebilir)
+    Verilen tek bir görseli PIL kullanarak modele uygun hale getirir.
     """
-    # Görseli oku
+
+    try:
+        img = Image.open(image_path)
+    except Exception as e:
+        raise FileNotFoundError(f"Görsel açılamadı: {image_path}\nHata: {e}")
+
+    # Renk moduna göre dönüştür
     if color_mode == 'grayscale':
-        image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+        img = img.convert("L")
     else:
-        image = cv2.imread(image_path, cv2.IMREAD_COLOR)
+        img = img.convert("RGB")
 
-    # Boyutlandır
-    image = cv2.resize(image, target_size)
+    # Yeniden boyutlandır
+    img = img.resize(target_size)
 
-    # Normalize et
-    image = image.astype('float32') / 255.0
+    # NumPy dizisine çevir + normalize
+    img_array = np.array(img).astype('float32') / 255.0
 
-    # Kanal boyutunu ekle (grayscale ise (128, 128) → (128, 128, 1))
+    # Kanal boyutu ekle (grayscale: (128,128) → (128,128,1))
     if color_mode == 'grayscale':
-        image = np.expand_dims(image, axis=-1)
+        img_array = np.expand_dims(img_array, axis=-1)
 
-    # Batch boyutu ekle → (1, 128, 128, 1)
-    image = np.expand_dims(image, axis=0)
+    # Batch boyutu ekle
+    img_array = np.expand_dims(img_array, axis=0)
 
-    return image
+    return img_array
+
 
 
 def predict_uploaded_image(image_path, model, label_map=None, target_size=(128, 128), color_mode='grayscale'):
