@@ -1,0 +1,34 @@
+.message {
+  display: flex;
+  margin-bottom: 15px;
+  max-width: 80%;
+}
+
+.user {
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+
+.assistant {
+  flex-direction: row; 
+  margin-right: auto;
+}
+
+.bubble {
+  padding: 12px 18px;
+  border-radius: 20px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.user .bubble {
+  background-color: #4A90E2;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.assistant .bubble {
+  background-color: #e9ecef;
+  color: #343a40;
+  border-bottom-left-radius: 4px;
+}

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
 :root {
   --primary-color: #4A90E2;
   --primary-color-dark: #357ABD;
@@ -16,8 +18,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--background-gradient);
 }
 

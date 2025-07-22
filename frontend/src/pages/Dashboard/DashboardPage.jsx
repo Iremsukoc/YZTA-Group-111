@@ -1,38 +1,90 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import styles from './DashboardPage.module.css';
-import searchIcon from '../../assets/search-icon.svg';
-import detailedIcon from '../../assets/detailed-icon.svg';
-import imageIcon from '../../assets/image.svg';
-
-
+import ResumeModal from '../../components/ResumeModal/ResumeModal';
 
 function DashboardPage() {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  const firstName = currentUser?.reloadUserInfo?.customAttributes ? JSON.parse(currentUser.reloadUserInfo.customAttributes).firstName : 'User';
+
+  const [ongoingAssessments, setOngoingAssessments] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchOngoingAssessments = async () => {
+      if (!currentUser) return;
+      try {
+        const token = await currentUser.getIdToken();
+        const response = await fetch('http://127.0.0.1:8000/assessments?status=in_progress', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setOngoingAssessments(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch ongoing assessments:", error);
+      }
+    };
+    fetchOngoingAssessments();
+  }, [currentUser]);
+
+  const handleStartNew = async () => {
+    try {
+      const token = await currentUser.getIdToken();
+      const response = await fetch('http://127.0.0.1:8000/assessments', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ assessment_type: "general_test" })
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to start a new assessment session.");
+      }
+
+      const data = await response.json();
+      navigate(`/assessment/${data.assessment_id}`);
+
+    } catch (error) {
+      console.error("Error starting new assessment:", error);
+      alert("Could not start a new assessment. Please try again later.");
+    }
+  };
+
+  const handleSmartButton = () => {
+    if (ongoingAssessments.length > 0) {
+      setModalOpen(true);
+    } else {
+      handleStartNew();
+    }
+  };
+
   return (
-    <div className={styles.cardGrid}>
-      <div className={styles.card}>
-        <img src={searchIcon} alt="" className={styles.cardIcon} />
-        <h3>General Evaluation</h3>
-        <p>We determine the most likely type of cancer with a short test based on your complaint.</p>
-        <button className={styles.actionButton}>Start General Test</button>
-      </div>
+    <>
+      <div className={styles.dashboardContainer}>
+        <section className={styles.welcomeHeader}>
+          <h2>Welcome back, {firstName}</h2>
+          <p>Ready to start a new health assessment ?</p>
+          <button onClick={handleSmartButton} className={styles.newAssessmentBtn}>
+            Start Health Assessment
+          </button>
+        </section>
 
-      <div className={styles.card}>
-        <img src={detailedIcon} alt="" className={styles.cardIcon} />
-        <h3>Detailed Analysis</h3>
-        <p>Get data-detailed risk prediction with AI support.</p>
-        <button className={styles.actionButton}>Start Detailed Analysis</button>
+        <section className={styles.assessmentsList}>
+        </section>
       </div>
-
-      <div className={styles.bottomCardWrapper}>
-        <div className={styles.card}>
-          <img src={imageIcon} alt="" className={styles.cardIcon} />
-          <h3>Image Processing</h3>
-          <p>Upload your medical images for advanced analysis.</p>
-          <button className={styles.actionButton}>Upload Image</button>
-        </div>
-      </div>
-    </div>
-  
+      <ResumeModal 
+        isOpen={isModalOpen} 
+        onClose={() => setModalOpen(false)} 
+        assessments={ongoingAssessments}
+        onStartNew={handleStartNew}
+      />
+    </>
   );
 }
 

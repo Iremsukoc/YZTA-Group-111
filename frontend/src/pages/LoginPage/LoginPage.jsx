@@ -5,6 +5,8 @@ import styles from './LoginPage.module.css';
 import loginImage from '../../assets/login-page-image.png';
 import eyeIcon from '../../assets/eye-icon.svg';
 import googleIcon from '../../assets/google-icon.svg';
+import logoRegAI from '../../assets/logo-regai.png';
+
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -39,7 +41,9 @@ function LoginPage() {
           <img src={loginImage} alt="Illustration" />
         </div>
         <div className={styles.rightSide}>
-          <div className={styles.logo}>HEALTH</div>
+          <div className={styles.logoWrapper}>
+            <img className={styles.logoImage} src={logoRegAI} alt="regAI Logo" />
+          </div>
           <h1 className={styles.welcomeTitle}>Welcome Back</h1>
           <p className={styles.welcomeSubtitle}>Enter your email and password to access your account</p>
           

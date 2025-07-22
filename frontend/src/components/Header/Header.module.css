@@ -16,6 +16,21 @@
     color: var(--primary-color);
     letter-spacing: 1px;
   }
+
+  .logoWrapper {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+  }
+
+  .logoImage {
+    height: 45px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+  }
   
   .authButtons {
     display: flex;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_15_144)">
+<rect width="24" height="24" fill="white"/>
+<rect x="9.5" y="3.5" width="5" height="12" rx="2.5" stroke="#000000" stroke-linejoin="round"/>
+<path d="M17 12V13C17 15.7614 14.7614 18 12 18V18C9.23858 18 7 15.7614 7 13V12" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 18V21M12 21H9M12 21H15" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_15_144">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>
