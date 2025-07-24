@@ -1,16 +1,13 @@
 Bu proje içerisinde Kolon Kanseri, Akciğer Kanseri ve Lösemi (Kan Kanseri) için geliştirilmiş 3 adet görüntü işleme modeli bulunmaktadır.
 
+'''
 Colon/
-
 ├── Colon
-
 ├── Leukemia
-
 ├── Lung
-
 ├── requirements.txt
-
 └── README.MD
+'''
 
 ---
 
