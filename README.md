@@ -1,10 +1,15 @@
 Bu proje içerisinde Kolon Kanseri, Akciğer Kanseri ve Lösemi (Kan Kanseri) için geliştirilmiş 3 adet görüntü işleme modeli bulunmaktadır.
 
 Colon/
+
 ├── Colon
+
 ├── Leukemia
+
 ├── Lung
+
 ├── requirements.txt
+
 └── README.MD
 
 ---
@@ -18,11 +23,17 @@ Bu klasör, kolon kanseri görüntülerini sınıflandırmak için eğitilmiş b
 
 ## Dosya Yapısı
 Colon/
+
 ├── model_cnn.h5 # Eğitilmiş Keras modeli
+
 ├── test_split_colon/ # Test görsellerinin bulunduğu klasör
+
 │ ├── Colon_adenocarcinoma/
+
 │ └── Colon_benign_tissue/
+
 ├── utils.py # Görüntü işleme ve tahmin fonksiyonları
+
 ├── predict.py # Modeli kullanarak görsel sınıflandırma yapan script
 
 ## Gerekli Kütüphaneler
@@ -117,12 +128,19 @@ duğu için aşağıda link olarak paylaşılmıştır. Tanıyabildiği kanser t
 ## Klasör Yapısı
 Leukemia/
 ├── leukemia_resnet_model.h5 # Eğitilmiş model dosyası     [Model Drive Linki](https://drive.google.com/file/d/12Vjt6pj3pI-jgg8dO1UMNFRE-BR-qTNF/view?usp=sharing)
+
 ├── test_split_leukemia/ # Test görselleri
+
 │ ├── Benign/
+
 │ ├── Early/
+
 │ ├── Pre/
+
 │ └── Pro/
+
 ├── utils.py # Görsel işleme ve tahmin yardımcıları
+
 ├── predict.py # Modeli çalıştırıp tahmin yapan script
 
 
@@ -184,11 +202,17 @@ Bu klasör, akciğer (lung) kanseri teşhisi için geliştirilmiş bir derin ö�
 ## Klasör Yapısı
 Lung/
 ├── lung_cancer_cnn.h5 # Eğitilmiş model dosyası
+
 ├── test_split_lung/ # Test görselleri
+
 │ ├── Benign cases/
+
 │ ├── Malignant cases/
+
 │ └── Normal cases/
+
 ├── utils.py # Görsel işleme ve tahmin yardımcı fonksiyonları
+
 ├── predict.py # Modeli yükleyip tahmin yapan script
 
 
