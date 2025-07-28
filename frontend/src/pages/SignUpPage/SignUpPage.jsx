@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './SignUpPage.module.css';
 import eyeIcon from '../../assets/eye-icon.svg';
 import googleIcon from '../../assets/google-icon.svg';
+import logoRegAI from '../../assets/logo-regai.png';
 
 
 function SignUpPage() {
@@ -98,8 +99,10 @@ function SignUpPage() {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.signupContainer}>
-                <div className={styles.logo}>HEALTH</div>
-                
+            <div className={styles.logoWrapper}>
+                <img className={styles.logoImage} src={logoRegAI} alt="regAI Logo" />
+            </div>
+               
                 {error && <div className={styles.errorMessage}>{error}</div>}
 
                 <form id="signupForm" onSubmit={handleSignup} noValidate>

@@ -1,0 +1,97 @@
+.inputContainer {
+  padding: 10px 20px 20px 20px;
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  background-color: #f8f9fa;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+}
+
+.textInput {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: none;
+  min-height: 24px;
+  max-height: 120px;
+  overflow-y: auto;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.textInput:focus {
+  outline: none;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconButton {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+.iconButton:hover {
+  background-color: #e9ecef;
+}
+
+.iconButton img {
+  width: 20px;
+  height: 20px;
+  background: none;
+  mix-blend-mode: multiply; 
+}
+
+.rightButtonsContainer {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.microphoneButton, .sendButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  composes: iconButton;
+}
+
+.sendButton {
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+}
+
+.inputForm.hasText .sendButton {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.inputForm.hasText .microphoneButton {
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+}

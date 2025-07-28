@@ -1,0 +1,75 @@
+.pageContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+.chatWrapper {
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.messageList {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.loadingIndicator {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  color: #7A86A1;
+  font-style: italic;
+}
+
+.welcomeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto; 
+  text-align: center;
+  color: #7A86A1;
+}
+
+.welcomeContainer .logo {
+  font-size: 48px;
+  font-weight: bold;
+  color: #4A90E2;
+  margin-bottom: 20px;
+}
+
+.welcomeContainer p {
+  font-size: 22px;
+  color: #5a6c7d;
+}
+
+.welcomeTitle {
+  font-size: 45px;
+  font-weight: 600;
+  color: var(--primary-color); 
+  margin-bottom: 10px;
+}
+
+.welcomeSubtitle {
+  font-size: 18px;
+  color: #34495e; 
+  max-width: 400px;
+}

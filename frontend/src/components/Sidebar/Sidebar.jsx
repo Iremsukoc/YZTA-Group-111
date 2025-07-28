@@ -10,6 +10,7 @@ import faqIcon from '../../assets/faq-icon.svg';
 import logoutIcon from '../../assets/logout-icon.svg';
 import helpIcon from '../../assets/help-icon.svg';
 import closeIcon from '../../assets/close-icon.svg';
+import logoRegAI from '../../assets/logo-regai.png';
 
 function Sidebar({ isMobileMenuOpen, closeMobileMenu, onOpenMessagePopup }) {
   const { logout } = useAuth();
@@ -18,7 +19,7 @@ function Sidebar({ isMobileMenuOpen, closeMobileMenu, onOpenMessagePopup }) {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate('/login');
+      navigate('/');
     } catch {
       alert('Failed to log out');
     }
@@ -39,7 +40,10 @@ function Sidebar({ isMobileMenuOpen, closeMobileMenu, onOpenMessagePopup }) {
 
   const menuContent = (
     <>
-      <div className={styles.logo}>HEALTH</div>
+      <div className={styles.logoWrapper}>
+        <img className={styles.logoImage} src={logoRegAI} alt="regAI Logo" />
+      </div>
+
       <ul className={styles.navList}>
         <li className={styles.navItem}>
           <NavLink to="/dashboard" onClick={handleLinkClick} className={({ isActive }) => isActive ? styles.active : ''}>

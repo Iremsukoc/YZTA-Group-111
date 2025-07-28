@@ -1,71 +1,97 @@
 .dashboardContainer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.cardGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  margin-top: 20px;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
+  
   width: 100%;
-  max-width: 500px;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
-.card h3 {
-  font-size: 20px;
-  color: #2c3e50;
-  margin: 15px 0 10px 0;
+.welcomeHeader {
+  margin-bottom: 50px;
 }
 
-.card p {
+.welcomeHeader h2 {
+  margin: 0 0 10px 0;
+  font-size: 32px;
+  color: var(--primary-color);  font-weight: 600;
+}
+
+.welcomeHeader p {
+  margin: 0;
   color: #7A86A1;
-  max-width: 300px;
-  line-height: 1.5;
-  margin-bottom: 25px;
+  font-size: 18px;
+  max-width: 600px;
 }
 
-.cardIcon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 10px;
-}
-
-.actionButton {
-  width: 100%;
-  max-width: 250px;
+.newAssessmentBtn {
   background-color: #4A90E2;
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 14px 28px;
   font-size: 16px;
   font-weight: 600;
   border-radius: 10px;
   cursor: pointer;
+  margin-top: 25px;
+  transition: all 0.2s ease-in-out;
+}
+.newAssessmentBtn:hover {
+  background-color: #357ABD;
+  transform: translateY(-2px);
 }
 
-.bottomCardWrapper {
-  grid-column: 1 / -1;
+.assessmentsList {
+  width: 100%;
+  max-width: 600px;
+}
+
+.listTitle {
+  font-size: 20px;
+  color: #2c3e50;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eef2f9;
+}
+
+.assessmentCard {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 15px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  text-align: left;
 }
 
-@media (max-width: 768px) {
-  .cardGrid {
-    grid-template-columns: 1fr;
-  }
+.assessmentInfo p {
+  margin: 0;
+  color: #7A86A1;
+  font-size: 14px;
+}
+.assessmentInfo p strong {
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.resumeBtn {
+  background-color: #5CB85C;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.noAssessments {
+    padding: 20px;
+    color: #7A86A1;
 }
