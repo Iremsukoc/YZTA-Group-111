@@ -17,19 +17,45 @@ function ResumeModal({ isOpen, onClose, assessments, onStartNew }) {
     onClose();
   };
 
+  const formatDate = (timestamp) => {
+    if (!timestamp || !timestamp.seconds) {
+      return 'Invalid Date';
+    }
+    return new Date(timestamp.seconds * 1000).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };  
+
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h3>Ongoing Assessments</h3>
-        <div className={styles.assessmentList}>
-          {assessments.map(asmnt => (
-            <div key={asmnt.id} className={styles.assessmentCard} onClick={() => handleResume(asmnt.id)}>
-              <p><strong>{asmnt.assessmentType.replace('_', ' ')}</strong></p>
-              <p>{new Date(asmnt.createdAt.seconds * 1000).toLocaleDateString()}</p>
-            </div>
-          ))}
+        <div className={styles.modalHeader}>
+          <h3>Ongoing Assessments</h3>
+          <button onClick={onClose} className={styles.closeButton}>&times;</button>
         </div>
-        <button onClick={handleStartNewAnyway}>Start a New Assessment Anyway</button>
+        
+        <div className={styles.assessmentList}>
+          {assessments && assessments.length > 0 ? (
+            assessments.map(asmnt => (
+              <div key={asmnt.assessment_id} className={styles.assessmentCard} onClick={() => handleResume(asmnt.assessment_id)}>
+                <div className={styles.assessmentInfo}>
+                  <p><strong>{asmnt.assessmentType?.replace('_', ' ') || 'Unknown Type'}</strong></p>
+                  <p>{formatDate(asmnt.createdAt)}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No ongoing assessments found.</p>
+          )}
+        </div>
+
+        <div className={styles.actions}>
+          <button onClick={handleStartNewAnyway} className={styles.startNewButton}>
+            Start a New Assessment Anyway
+          </button>
+        </div>
       </div>
     </div>
   );

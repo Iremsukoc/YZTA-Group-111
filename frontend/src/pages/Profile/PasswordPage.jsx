@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styles from './PasswordPage.module.css';
 import eyeIcon from '../../assets/eye-icon.svg';
+import { useAuth } from '../../context/AuthContext';
+import NotificationToast from '../../components/NotificationToast/NotificationToast.jsx';
+
 
 function PasswordPage() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -13,10 +16,13 @@ function PasswordPage() {
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [popup, setPopup] = useState({ show: false, message: '', type: '' });
+
+
+  const { currentUser } = useAuth();
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-    setError('');
 
     if (newPassword !== confirmNewPassword) {
       return setError('New passwords do not match.');
@@ -26,17 +32,46 @@ function PasswordPage() {
     }
 
     setLoading(true);
-    alert('Password would be changed here!');
+    try {
+      const token = await currentUser.getIdToken();
+      const response = await fetch('http://127.0.0.1:8000/users/me/change-password', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          current_password: currentPassword,
+          new_password: newPassword
+        })
+      });
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.detail || 'Failed to change password.');
+      }
+      setPopup({ show: true, message: 'Password changed successfully!', type: 'success' });
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmNewPassword('');
+    } catch (err) {
+      setPopup({ show: true, message: err.message, type: 'error' });
+    }
     setLoading(false);
   };
 
   return (
     <div className={styles.passwordContainer}>
+      {popup.show && (
+        <NotificationToast
+          message={popup.message}
+          type={popup.type}
+          onClose={() => setPopup({ show: false, message: '', type: '' })}
+        />
+      )}
       <div className={styles.header}>
         <h2>Password & Security</h2>
       </div>
 
-      {error && <div className={styles.errorMessage}>{error}</div>}
 
       <form onSubmit={handleChangePassword} className={styles.form}>
         <div className={styles.formGroup}>

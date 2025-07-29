@@ -33,7 +33,10 @@ function DashboardPage() {
 
   const handleStartNew = async () => {
     try {
-      const token = await currentUser.getIdToken();
+      if (!currentUser) {
+        throw new Error("User not authenticated.");
+      }      
+      const token = await currentUser.getIdToken(true);
       const response = await fetch('http://127.0.0.1:8000/assessments', {
         method: 'POST',
         headers: {
@@ -44,10 +47,18 @@ function DashboardPage() {
       });
 
       if (!response.ok) {
+        const errorData = await response.json();
         throw new Error("Failed to start a new assessment session.");
       }
 
       const data = await response.json();
+
+      console.log("--- DEBUG ---");
+      console.log("Backend'den Gelen Yanıt (data):", data);
+      console.log("Alınan ID (data.assessment_id):", data.assessment_id);
+      console.log("Yönlendirilecek URL:", `/assessment/${data.assessment_id}`);
+      console.log("--- DEBUG SONU ---");
+      
       navigate(`/assessment/${data.assessment_id}`);
 
     } catch (error) {

@@ -1,0 +1,32 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding-top: 20px;
+    z-index: 1001;
+    pointer-events: none;
+  }
+  
+  .toast {
+    padding: 15px 30px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    pointer-events: auto;
+  }
+  
+  .success {
+    background-color: #4A90E2;
+  }
+  
+  .error {
+    background-color: #dc3545;
+  }

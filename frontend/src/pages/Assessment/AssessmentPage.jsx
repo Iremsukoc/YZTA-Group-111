@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './AssessmentPage.module.css';
 import Message from '../../components/Chat/Message';
 import ChatInput from '../../components/Chat/ChatInput';
-import logoRegAI from '../../assets/logo-regai.png';
-
+import NotificationToast from '../../components/NotificationToast/NotificationToast'; 
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase.js';
+import { fetchAssessmentDetail } from '../../api/AssessmentApi';
 
 const ChatWelcomeScreen = ({ name }) => (
   <div className={styles.welcomeContainer}>
@@ -16,17 +18,60 @@ const ChatWelcomeScreen = ({ name }) => (
 function AssessmentPage() {
   const { assessmentId } = useParams();
   const { currentUser } = useAuth();
-  
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [assessmentStatus, setAssessmentStatus] = useState(null); 
+  const [userData, setUserData] = useState(null);
+  const [popup, setPopup] = useState({ show: false, message: '', type: '' }); 
+  const [assessmentDetail, setAssessmentDetail] = useState(null);
   const messageListRef = useRef(null);
-  const firstName = currentUser?.reloadUserInfo?.customAttributes 
-                  ? JSON.parse(currentUser.reloadUserInfo.customAttributes).firstName 
-                  : 'User';
 
 
   useEffect(() => {
-    // Gerçekte burada backend'den /assessments/:id endpoint'i ile geçmiş çekilecek.
+    const fetchUserData = async () => {
+      if (currentUser) {
+        try {
+          const userDocRef = doc(db, 'users', currentUser.uid);
+          const userDoc = await getDoc(userDocRef);
+          if (userDoc.exists()) {
+            setUserData(userDoc.data());
+          }
+        } catch (err) {
+          console.error("Failed to fetch user data:", err);
+        }
+      }
+    };
+    fetchUserData();
+  }, [currentUser]);
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const data = await fetchAssessmentDetail(assessmentId);
+        const conv = data.conversation || [];
+        const hasDiagnosis = conv.some(m => m.type === 'diagnosis');
+        if (!hasDiagnosis && data.status === 'completed' && (data.risk_level || data.confidence != null)) {
+          conv.push({
+            role: 'assistant',
+            type: 'diagnosis',
+            content: {
+              title: "Diagnosis Complete",
+              result: data.risk_level,
+              confidence: data.confidence,
+              note: "Note: This is not a final diagnosis. Please consult a medical professional."
+            }
+          });
+        }
+        setMessages(conv);
+        setAssessmentStatus(data.status);
+        setAssessmentDetail(data);
+      } catch (err) {
+        console.error("Assessment detayları alınamadı:", err);
+      }
+    };
+    if (currentUser && assessmentId) {
+      fetchHistory();
+    }
   }, [assessmentId, currentUser]);
 
   useEffect(() => {
@@ -35,16 +80,36 @@ function AssessmentPage() {
     }
   }, [messages]);
 
+  useEffect(() => {
+    if (assessmentDetail?.status) {
+      setAssessmentStatus(assessmentDetail.status);
+    }
+  }, [assessmentDetail?.status]);
+  
+  const stageLabel = useMemo(() => {
+    switch (assessmentStatus) {
+      case "general_test_in_progress":
+        return "🩺 Stage 1: General Health Assessment";
+      case "triage_in_progress":
+        return "🔍 Stage 2: Triage Assessment";
+      case "detailed_qa_in_progress":
+        return "📋 Stage 3: Detailed Analysis";
+      case "awaiting_image":
+        return "📷 Stage 4: Image Upload and Analysis";
+      case "completed":
+        return "✅ Assessment Completed";
+      default:
+        return "";
+    }
+  }, [assessmentStatus]);
+  
   const handleSendMessage = async (userMessage) => {
     if (!assessmentId) return;
-
-    const newMessages = messages.length === 0 
-      ? [{ role: 'assistant', content: 'Hello! How can I help you with your health concerns today?' }, { role: 'user', content: userMessage }]
-      : [...messages, { role: 'user', content: userMessage }];
-
-    setMessages(newMessages);
+  
+    const userMsgObject = { role: 'user', content: userMessage };
+    setMessages(prev => [...prev, userMsgObject]);
     setIsLoading(true);
-
+  
     try {
       const token = await currentUser.getIdToken();
       const response = await fetch(`http://127.0.0.1:8000/assessments/${assessmentId}/messages`, {
@@ -55,14 +120,68 @@ function AssessmentPage() {
         },
         body: JSON.stringify({ content: userMessage })
       });
+  
+      const responseData = await response.json();
+      if (!response.ok) throw new Error(responseData.detail || "Failed to get response.");
+  
+      const assistantMsgObject = { role: 'assistant', content: responseData.content };
+      setMessages(prev => [...prev, assistantMsgObject]);
+  
+      if (responseData.new_status) {
+        setAssessmentStatus(responseData.new_status);
+      }
+  
+    } catch (err) {
+      console.error("Message error:", err);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'LLM hatası oluştu.' }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
 
-      if (!response.ok) throw new Error("Failed to get response from backend.");
+  const handleImageSelected = async (file) => {
+    setIsLoading(true);
+    setPopup({ show: true, message: 'Görüntü yükleniyor ve analiz ediliyor...', type: 'success' });
 
-      const data = await response.json();
-      setMessages(prev => [...prev, data]);
+    const formData = new FormData();
+    formData.append('image_file', file);
+    const mdl =
+      (assessmentDetail?.suspectedCancerType && ['brain','skin','breast'].includes(assessmentDetail.suspectedCancerType))
+        ? assessmentDetail.suspectedCancerType
+        : (assessmentDetail?.assessment_type && ['brain','skin','breast'].includes(assessmentDetail.assessment_type))
+        ? assessmentDetail.assessment_type
+        : 'brain';
+
+    formData.append('model_type', mdl);
+    try {
+      const token = await currentUser.getIdToken();
+      const response = await fetch(`http://127.0.0.1:8000/assessments/${assessmentId}/image`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: formData,
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.detail || 'Görüntü analizi başarısız oldu.');
+
+      setPopup({ show: true, message: 'Görüntü başarıyla analiz edildi!', type: 'success' });
+
+      const reportMessage = `Diagnosis Complete Sonuç: ${result.predicted_class}, %${result.confidence} güvenle. Unutmayın, bu nihai bir teşhis değildir. Lütfen bir doktora danışın.`;
+      const reportMsgObject = {
+        role: 'assistant',
+        type: 'diagnosis',
+        content: {
+          title: "Diagnosis Complete",
+          result: result.predicted_class,
+          confidence: result.confidence,
+          note: "Note: This is not a final diagnosis. Please consult a medical professional."
+        }
+      };
+      setMessages(prev => [...prev, reportMsgObject]);
+      setAssessmentStatus('completed');
+
     } catch (error) {
-      console.error("Failed to send message:", error);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, there was an error processing your message.' }]);
+      setPopup({ show: true, message: error.message, type: 'error' });
     } finally {
       setIsLoading(false);
     }
@@ -70,23 +189,56 @@ function AssessmentPage() {
 
   return (
     <div className={styles.pageContainer}>
+      {popup.show && (
+        <NotificationToast
+          message={popup.message}
+          type={popup.type}
+          onClose={() => setPopup({ show: false, message: '', type: '' })}
+        />
+      )}
+
+      <div className={styles.phaseInfo}>
+        {assessmentStatus === "general_test_in_progress" && "🩺 Stage 1: General Health Assessment"}
+        {assessmentStatus === "triage_in_progress" && "🔍 Stage 2: Triage Assessment"}
+        {assessmentStatus === "detailed_qa_in_progress" && "📋 Stage 3: Detailed Analysis"}
+        {assessmentStatus === "awaiting_image" && "📷 Stage 4: Image Upload and Analysis"}
+        {assessmentStatus === "completed" && "✅ Assessment Completed"}
+      </div>
+
       <div className={styles.chatContainer}>
-        
         <div className={styles.chatWrapper}>
-          
+
           <div className={styles.messageList} ref={messageListRef}>
-            {messages.length === 0 ? (
-              <ChatWelcomeScreen name={firstName} />
+            {messages.length === 0 && !isLoading ? (
+              <ChatWelcomeScreen name={userData?.first_name || 'User'} />
             ) : (
-              messages.map((msg, index) => <Message key={index} message={msg} />)
+              messages.map((msg, index) => (
+                <Message key={index} message={msg} />
+              ))
             )}
-            {isLoading && <div className={styles.loadingIndicator}>Assistant is typing...</div>}
+
+            {isLoading && (
+              <div className={styles.loadingIndicator}>
+                Assistant is typing...
+              </div>
+            )}
           </div>
 
-          <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
-          
+          {assessmentStatus === 'completed' && (
+            <div className={styles.assessmentComplete}>
+              The assessment is complete. Thank you.
+            </div>
+          )}
+
+          {assessmentStatus !== 'completed' && (
+            <ChatInput
+              onSendMessage={handleSendMessage}
+              isLoading={isLoading}
+              isImageUploadAllowed={assessmentStatus === "awaiting_image"}
+              onImageSelected={handleImageSelected}
+            />
+          )}
         </div>
-        
       </div>
     </div>
   );
