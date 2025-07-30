@@ -17,12 +17,16 @@ function DashboardPage() {
       if (!currentUser) return;
       try {
         const token = await currentUser.getIdToken();
-        const response = await fetch('http://127.0.0.1:8000/assessments?status=in_progress', {
+        const response = await fetch('http://127.0.0.1:8000/assessments/report_summaries', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {
           const data = await response.json();
-          setOngoingAssessments(data);
+          console.log("All assessments:", data);
+          // Filter out completed assessments
+          const ongoing = data.filter(assessment => assessment.status !== 'completed');
+          console.log("Ongoing assessments:", ongoing);
+          setOngoingAssessments(ongoing);
         }
       } catch (error) {
         console.error("Failed to fetch ongoing assessments:", error);
@@ -68,9 +72,12 @@ function DashboardPage() {
   };
 
   const handleSmartButton = () => {
+    console.log("handleSmartButton called, ongoingAssessments:", ongoingAssessments);
     if (ongoingAssessments.length > 0) {
+      console.log("Opening modal");
       setModalOpen(true);
     } else {
+      console.log("Starting new assessment");
       handleStartNew();
     }
   };

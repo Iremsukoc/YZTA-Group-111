@@ -28,6 +28,7 @@ class AssessmentResponseDTO(BaseModel):
     status: str
     created_at: str
     assessment_type: Optional[str] = None
+    assessment_name: Optional[str] = None
     risk_level: Optional[str] = None
     confidence: Optional[float] = None
     conversation: Optional[list[dict]] = None

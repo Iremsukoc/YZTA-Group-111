@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ResumeModal.module.css';
+import profileIcon from '../../assets/profile-icon.svg';
+
 
 function ResumeModal({ isOpen, onClose, assessments, onStartNew }) {
   const navigate = useNavigate();
@@ -18,15 +20,19 @@ function ResumeModal({ isOpen, onClose, assessments, onStartNew }) {
   };
 
   const formatDate = (timestamp) => {
-    if (!timestamp || !timestamp.seconds) {
+    if (!timestamp) return 'Invalid Date';
+    try {
+      const date = new Date(timestamp);
+      if (isNaN(date.getTime())) return 'Invalid Date';
+      return date.toLocaleDateString('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      });
+    } catch (error) {
       return 'Invalid Date';
     }
-    return new Date(timestamp.seconds * 1000).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };  
+  };
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -35,17 +41,37 @@ function ResumeModal({ isOpen, onClose, assessments, onStartNew }) {
           <h3>Ongoing Assessments</h3>
           <button onClick={onClose} className={styles.closeButton}>&times;</button>
         </div>
-        
+
         <div className={styles.assessmentList}>
           {assessments && assessments.length > 0 ? (
-            assessments.map(asmnt => (
-              <div key={asmnt.assessment_id} className={styles.assessmentCard} onClick={() => handleResume(asmnt.assessment_id)}>
-                <div className={styles.assessmentInfo}>
-                  <p><strong>{asmnt.assessmentType?.replace('_', ' ') || 'Unknown Type'}</strong></p>
-                  <p>{formatDate(asmnt.createdAt)}</p>
+            assessments.map((asmnt) => {
+              const title =
+                asmnt.title ||
+                asmnt.assessment_type?.replace('_', ' ') ||
+                'Unknown Type';
+
+              return (
+                <div
+                  key={asmnt.assessment_id}
+                  className={styles.reportCard}
+                  onClick={() => handleResume(asmnt.assessment_id)}
+                >
+                  <div className={styles.cardIcon}>
+                    <img src={profileIcon} alt="icon" />
+                  </div>
+                  <div className={styles.cardContent}>
+                    <div className={styles.cardTitle}>{title}</div>
+                    <div className={styles.cardDate}>
+                      {formatDate(asmnt.created_at)}
+                    </div>
+                  </div>
+                  <div className={styles.cardStatus}>
+                    <span className={styles.statusBadge}>In progress</span>
+                    <button className={styles.continueButton}>Continue</button>
+                  </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <p>No ongoing assessments found.</p>
           )}
@@ -53,7 +79,7 @@ function ResumeModal({ isOpen, onClose, assessments, onStartNew }) {
 
         <div className={styles.actions}>
           <button onClick={handleStartNewAnyway} className={styles.startNewButton}>
-            Start a New Assessment Anyway
+            Start New Assessment
           </button>
         </div>
       </div>
@@ -62,3 +88,4 @@ function ResumeModal({ isOpen, onClose, assessments, onStartNew }) {
 }
 
 export default ResumeModal;
+

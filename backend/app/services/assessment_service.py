@@ -215,8 +215,18 @@ class AssessmentService:
         results = []
         for doc in docs:
             data = doc.to_dict()
-            data["assessment_id"] = doc.id
-            results.append(data)
+            created_at = data.get("createdAt")
+            results.append({
+                "assessment_id": doc.id,
+                "user_id": user_id,
+                "status": data.get("status", ""),
+                "created_at": created_at.isoformat() if hasattr(created_at, "isoformat") else str(created_at),
+                "assessment_type": data.get("assessmentType"),
+                "assessment_name": data.get("assessmentName"),
+                "risk_level": data.get("suspectedCancerType"),
+                "confidence": None,
+                "conversation": data.get("conversation", [])
+            })
         return results
 
     def get_report_summaries(self, user_id: str) -> list[dict]:

@@ -142,7 +142,8 @@ class AssessmentController:
         current_user: dict = Depends(get_current_user)
     ) -> list[AssessmentResponseDTO]:
         user_id = current_user.get("uid")
-        return assessment_service.get_all_assessments(user_id, status)
+        assessments = assessment_service.get_all_assessments(user_id, status)
+        return [AssessmentResponseDTO(**assessment) for assessment in assessments]
 
     async def get_report_summaries(
         self,

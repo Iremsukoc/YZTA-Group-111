@@ -4,27 +4,22 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(30, 41, 59, 0.6);
-  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  z-index: 999;
 }
 
 .modal {
-  background-color: white;
+  background: white;
   border-radius: 16px;
-  padding: 24px 30px;
-  width: 100%;
-  max-width: 550px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  animation: fade-in 0.3s ease-out;
-}
-
-@keyframes fade-in {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .modalHeader {
@@ -32,73 +27,108 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #eef2f9;
-}
-
-.modalHeader h3 {
-  margin: 0;
-  font-size: 20px;
-  color: #2c3e50;
 }
 
 .closeButton {
-  background: none;
+  background: transparent;
   border: none;
-  font-size: 28px;
-  color: #7A86A1;
+  font-size: 24px;
   cursor: pointer;
-  line-height: 1;
 }
 
 .assessmentList {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 10px; 
+  gap: 12px;
 }
 
-.assessmentCard {
-  background-color: #f8f9fa;
-  border: 1px solid #eef2f9;
-  border-radius: 12px;
-  padding: 15px 20px;
+.reportCard {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.assessmentCard:hover {
-  border-color: #4A90E2;
-  background-color: #eef3ff;
+
+.reportCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
-.assessmentInfo p {
-  margin: 0;
-  color: #7A86A1;
+.cardIcon img {
+  width: 36px;
+  height: 36px;
 }
-.assessmentInfo p strong {
-  color: #2c3e50;
+
+.cardContent {
+  flex: 1;
+  margin-left: 16px;
+}
+
+.cardTitle {
+  font-weight: 600;
+  color: #1e1e1e;
   font-size: 16px;
 }
 
-.actions {
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid #eef2f9;
+.cardDate {
+  font-size: 14px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.cardStatus {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.statusBadge {
+  background-color: #fff2cc;
+  color: #a67c00;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.continueButton {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.continueButton:hover {
+  background-color: #2563eb;
+}
+
+.actions {
+  margin-top: 20px;
+  text-align: right;
 }
 
 .startNewButton {
-  background-color: #4A90E2;
-  color: white;
+  background-color: #3B82F6;
+  color: #ffffff;
   border: none;
-  padding: 10px 20px;
   border-radius: 8px;
-  cursor: pointer;
+  padding: 10px 16px;
+  font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
+
+.startNewButton:hover {
+  background-color: #c7d2fe;
+}
+
