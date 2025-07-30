@@ -5,6 +5,19 @@ from fastapi import UploadFile
 from firebase_admin import firestore
 from app.services import llm_service
 from ml_engine.predict_system import CancerPredictor
+import numpy as np
+
+def convert_numpy(obj):
+    if isinstance(obj, dict):
+        return {k: convert_numpy(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_numpy(v) for v in obj]
+    elif isinstance(obj, (np.float32, np.float64)):
+        return float(obj)
+    elif isinstance(obj, (np.int32, np.int64)):
+        return int(obj)
+    else:
+        return obj
 
 
 class AssessmentService:
@@ -122,7 +135,7 @@ class AssessmentService:
             raise PermissionError("User is not authorized for this assessment.")
             
         data = doc.to_dict()
-        valid_models = ['brain', 'skin', 'breast']
+        valid_models = ['brain', 'skin', 'breast', 'colon', 'lung', 'leukemia']
         suspected = (data.get("suspectedCancerType") or "").lower().strip()
         assessment_type = (data.get("assessmentType") or "").lower().strip()
         if suspected in valid_models:
@@ -152,6 +165,7 @@ class AssessmentService:
 
             if "error" in ml_result:
                 raise Exception(f"ML script returned an error: {ml_result['error']}")
+            ml_result = convert_numpy(ml_result)
         finally:
             if os.path.exists(file_path):
                 os.remove(file_path)
