@@ -2,6 +2,8 @@ from pydantic import BaseModel, Field
 from typing import Literal
 from typing import Optional
 from datetime import datetime
+from typing import Union
+
 
 
 class CreateAssessmentDTO(BaseModel):
@@ -34,8 +36,8 @@ class AssessmentResponseDTO(BaseModel):
 class MessageResponseDTO(BaseModel):
 
     role: Literal["assistant"]
-    content: str
-    new_status: Optional[str] = Field(None, alias="newStatus")
+    content: Union[str, dict]
+    new_status: Optional[str] = None
 
 class ReportSummaryDTO(BaseModel):
     assessment_id: str

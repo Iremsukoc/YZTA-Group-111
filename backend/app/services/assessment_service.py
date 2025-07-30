@@ -74,7 +74,12 @@ class AssessmentService:
         response_text = llm_output.get("response")
         next_step = llm_output.get("next_step")
 
-        assistant_message = {"role": "assistant", "content": response_text, "timestamp": now}
+        # Create a regular assistant message (not a diagnosis message)
+        assistant_message = {
+            "role": "assistant",
+            "content": response_text,
+            "timestamp": now
+        }
         update_data = {
             "conversation": firestore.ArrayUnion([user_message, assistant_message]),
             "updatedAt": firestore.SERVER_TIMESTAMP
@@ -84,8 +89,6 @@ class AssessmentService:
             data["suspectedCancerType"] = llm_output["cancer_type"]
             current_name = data.get("assessmentName") or ""
             new_type = llm_output["cancer_type"]
-            print("CURRENT NAME:", current_name)
-            print("STARTSWITH CHECK:", current_name.startswith("General Test"))
             if current_name.lower().startswith("general test"):
                 assessments = db.collection("assessments") \
                     .where("userId", "==", user_id) \
@@ -96,7 +99,6 @@ class AssessmentService:
                     if new_type.replace('_', ' ') in existing_name:
                         count += 1
                 new_name = f"{new_type.replace('_', ' ').title()} Test {count}"
-                print("NEW ASSESSMENT NAME:", new_name)
                 update_data["assessmentName"] = new_name    
 
         current_status = data.get("status")
@@ -166,14 +168,39 @@ class AssessmentService:
             if "error" in ml_result:
                 raise Exception(f"ML script returned an error: {ml_result['error']}")
             ml_result = convert_numpy(ml_result)
+
+            print("ML_RESULT:", ml_result)
+
+            for key, value in ml_result.items():
+                if isinstance(value, np.generic):
+                    ml_result[key] = float(value)
+                elif isinstance(value, dict):
+                    for sub_key, sub_value in value.items():
+                        if isinstance(sub_value, np.generic):
+                            ml_result[key][sub_key] = float(sub_value)
         finally:
             if os.path.exists(file_path):
                 os.remove(file_path)
+
+        # Create diagnosis message with ML results
+        now = datetime.now(timezone.utc)
+        diagnosis_message = {
+            "role": "assistant",
+            "type": "diagnosis",
+            "timestamp": now,
+            "content": {
+                "title": "Diagnosis Complete",
+                "result": ml_result.get("predicted_class", "Unknown"),
+                "confidence": ml_result.get("confidence"),
+                "note": "This is not a final diagnosis. Please consult a medical professional."
+            }
+        }
 
         update_data = {
             "status": "completed",
             "imageAnalysisResult": ml_result,
             "usedModel": model_type,
+            "conversation": firestore.ArrayUnion([diagnosis_message]),
             "updatedAt": firestore.SERVER_TIMESTAMP
         }
         assessment_ref.update(update_data)
@@ -254,6 +281,7 @@ class AssessmentService:
         created_at = data.get("createdAt")
         image_result = data.get("imageAnalysisResult") or {}
         risk_level = image_result.get("predicted_class", "Unknown")
+        confidence = image_result.get("confidence")
 
         return {
             "assessment_id": assessment_id,
@@ -262,6 +290,7 @@ class AssessmentService:
             "assessment_type": data.get("assessmentType"),
             "created_at": str(created_at) if created_at else None,
             "risk_level": risk_level,
+            "confidence": confidence,
             "status": data.get("status"),
             "conversation": data.get("conversation", []),
         }

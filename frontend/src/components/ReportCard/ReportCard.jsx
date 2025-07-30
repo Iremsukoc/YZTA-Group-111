@@ -4,7 +4,7 @@ import lungIcon from '../../assets/profile-icon.svg';
 import { useNavigate } from 'react-router-dom';
 
 function ReportCard({ report }) {
-  const { title, date, riskLevel, status, id } = report;
+  const { title, date, riskLevel, status, id, confidence } = report;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -33,6 +33,7 @@ function ReportCard({ report }) {
         <div className={`${styles.risk} ${getRiskClass()}`}>
           <span className={styles.riskDot}></span>
           {riskLevel} Risk
+
         </div>
       ) : (
         <button className={styles.continueBtn} type="button">

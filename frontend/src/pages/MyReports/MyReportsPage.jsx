@@ -22,7 +22,6 @@ function MyReportsPage() {
     const loadReports = async () => {
       try {
         const data = await fetchReportSummaries();
-        console.log("API'den gelen raporlar:", data);
         setReports(data);
       } catch (error) {
         console.error("Raporlar alınamadı:", error);
@@ -33,7 +32,7 @@ function MyReportsPage() {
 
   const handleStartAssessment = async () => {
     try {
-      const data = await startNewAssessment(); // varsayılan "general"
+      const data = await startNewAssessment();
       navigate(`/assessment/${data.assessment_id}`);
     } catch (error) {
       console.error("Assessment başlatma hatası:", error);
@@ -99,7 +98,8 @@ function MyReportsPage() {
                   date: new Date(report.created_at).toLocaleDateString(),
                   riskLevel: report.risk_level?.split(' ')[0] || 'Unknown',
                   status: report.status,
-                  canContinue: report.can_continue  
+                  canContinue: report.can_continue,
+                  confidence: report.confidence,  
                 }}
                 onClick={() => navigate(`/assessment/${report.assessment_id}`)}
 

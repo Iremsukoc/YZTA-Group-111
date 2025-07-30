@@ -49,19 +49,24 @@ function AssessmentPage() {
       try {
         const data = await fetchAssessmentDetail(assessmentId);
         const conv = data.conversation || [];
-        const hasDiagnosis = conv.some(m => m.type === 'diagnosis');
-        if (!hasDiagnosis && data.status === 'completed' && (data.risk_level || data.confidence != null)) {
-          conv.push({
-            role: 'assistant',
-            type: 'diagnosis',
-            content: {
-              title: "Diagnosis Complete",
-              result: data.risk_level,
-              confidence: data.confidence,
-              note: "Note: This is not a final diagnosis. Please consult a medical professional."
-            }
-          });
+        
+        // If assessment is completed but no diagnosis message exists, create one
+        if (data.status === 'completed' && (data.risk_level || data.confidence != null)) {
+          const hasDiagnosis = conv.some(m => m.type === 'diagnosis');
+          if (!hasDiagnosis) {
+            conv.push({
+              role: 'assistant',
+              type: 'diagnosis',
+              content: {
+                title: "Diagnosis Complete",
+                result: data.risk_level,
+                confidence: data.confidence,
+                note: "Note: This is not a final diagnosis. Please consult a medical professional."
+              }
+            });
+          }
         }
+        
         setMessages(conv);
         setAssessmentStatus(data.status);
         setAssessmentDetail(data);
@@ -166,18 +171,9 @@ function AssessmentPage() {
 
       setPopup({ show: true, message: 'Görüntü başarıyla analiz edildi!', type: 'success' });
 
-      const reportMessage = `Diagnosis Complete Sonuç: ${result.predicted_class}, %${result.confidence} güvenle. Unutmayın, bu nihai bir teşhis değildir. Lütfen bir doktora danışın.`;
-      const reportMsgObject = {
-        role: 'assistant',
-        type: 'diagnosis',
-        content: {
-          title: "Diagnosis Complete",
-          result: result.predicted_class,
-          confidence: result.confidence,
-          note: "Note: This is not a final diagnosis. Please consult a medical professional."
-        }
-      };
-      setMessages(prev => [...prev, reportMsgObject]);
+      // Refresh the assessment data to get the updated conversation with diagnosis message
+      const updatedData = await fetchAssessmentDetail(assessmentId);
+      setMessages(updatedData.conversation || []);
       setAssessmentStatus('completed');
 
     } catch (error) {
