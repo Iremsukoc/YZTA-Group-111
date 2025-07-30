@@ -13,6 +13,7 @@ function PersonalDetails() {
   const [formData, setFormData] = useState(userData);
   const [popup, setPopup] = useState({ show: false, message: '', type: '' });
 
+
   useEffect(() => {
     setFormData(userData);
   }, [userData]);
