@@ -8,6 +8,7 @@ import NotificationToast from '../../components/NotificationToast/NotificationTo
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.js';
 import { fetchAssessmentDetail } from '../../api/AssessmentApi';
+import ImageUploadPrompt from '../../components/ImageUploadPrompt/ImageUploadPrompt';
 
 const ChatWelcomeScreen = ({ name }) => (
   <div className={styles.welcomeContainer}>
@@ -50,7 +51,6 @@ function AssessmentPage() {
         const data = await fetchAssessmentDetail(assessmentId);
         const conv = data.conversation || [];
         
-        // If assessment is completed but no diagnosis message exists, create one
         if (data.status === 'completed' && (data.risk_level || data.confidence != null)) {
           const hasDiagnosis = conv.some(m => m.type === 'diagnosis');
           if (!hasDiagnosis) {
@@ -71,7 +71,7 @@ function AssessmentPage() {
         setAssessmentStatus(data.status);
         setAssessmentDetail(data);
       } catch (err) {
-        console.error("Assessment detayları alınamadı:", err);
+        console.error("Assessment details could not be retrieved:", err);
       }
     };
     if (currentUser && assessmentId) {
@@ -138,7 +138,7 @@ function AssessmentPage() {
   
     } catch (err) {
       console.error("Message error:", err);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'LLM hatası oluştu.' }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'An LLM error has occurred.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -147,16 +147,17 @@ function AssessmentPage() {
 
   const handleImageSelected = async (file) => {
     setIsLoading(true);
-    setPopup({ show: true, message: 'Görüntü yükleniyor ve analiz ediliyor...', type: 'success' });
+    setPopup({ show: true, message: 'Image is loading and being analyzed...', type: 'success' });
 
     const formData = new FormData();
     formData.append('image_file', file);
+    const validModels = ['brain', 'skin', 'breast', 'colon', 'lung', 'leukemia'];
     const mdl =
-      (assessmentDetail?.suspectedCancerType && ['brain','skin','breast'].includes(assessmentDetail.suspectedCancerType))
-        ? assessmentDetail.suspectedCancerType
-        : (assessmentDetail?.assessment_type && ['brain','skin','breast'].includes(assessmentDetail.assessment_type))
-        ? assessmentDetail.assessment_type
-        : 'brain';
+    (assessmentDetail?.suspectedCancerType && validModels.includes(assessmentDetail.suspectedCancerType))
+      ? assessmentDetail.suspectedCancerType
+      : (assessmentDetail?.assessment_type && validModels.includes(assessmentDetail.assessment_type))
+      ? assessmentDetail.assessment_type
+      : 'brain';
 
     formData.append('model_type', mdl);
     try {
@@ -167,11 +168,10 @@ function AssessmentPage() {
         body: formData,
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.detail || 'Görüntü analizi başarısız oldu.');
+      if (!response.ok) throw new Error(result.detail || 'Image analysis failed.');
 
-      setPopup({ show: true, message: 'Görüntü başarıyla analiz edildi!', type: 'success' });
+      setPopup({ show: true, message: 'The image has been successfully analyzed!', type: 'success' });
 
-      // Refresh the assessment data to get the updated conversation with diagnosis message
       const updatedData = await fetchAssessmentDetail(assessmentId);
       setMessages(updatedData.conversation || []);
       setAssessmentStatus('completed');
@@ -194,11 +194,7 @@ function AssessmentPage() {
       )}
 
       <div className={styles.phaseInfo}>
-        {assessmentStatus === "general_test_in_progress" && "🩺 Stage 1: General Health Assessment"}
-        {assessmentStatus === "triage_in_progress" && "🔍 Stage 2: Triage Assessment"}
-        {assessmentStatus === "detailed_qa_in_progress" && "📋 Stage 3: Detailed Analysis"}
-        {assessmentStatus === "awaiting_image" && "📷 Stage 4: Image Upload and Analysis"}
-        {assessmentStatus === "completed" && "✅ Assessment Completed"}
+        {stageLabel}
       </div>
 
       <div className={styles.chatContainer}>
@@ -219,6 +215,10 @@ function AssessmentPage() {
               </div>
             )}
           </div>
+
+          {assessmentStatus === 'awaiting_image' && (
+            <ImageUploadPrompt onFileSelect={handleImageSelected} />
+          )}
 
           {assessmentStatus === 'completed' && (
             <div className={styles.assessmentComplete}>

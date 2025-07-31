@@ -55,7 +55,7 @@ def _normalize_llm_output(llm_out: dict) -> dict:
 
         if "cancer_type" in llm_out and isinstance(llm_out["cancer_type"], str):
             ct = llm_out["cancer_type"].lower().strip()
-            if ct in ["brain", "skin", "breast"]:
+            if ct in ["brain", "skin", "breast", "colon", "lung", "leukemia"]:
                 out["cancer_type"] = ct
 
     return out

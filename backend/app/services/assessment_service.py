@@ -251,10 +251,6 @@ class AssessmentService:
 
         for doc in docs:
             data = doc.to_dict()
-            print(f"FINAL NAME SENT: {data.get('assessmentName')}")  # log
-            print(f"DATA ID: {doc.id}")
-            print(f"AssessmentName: {data.get('assessmentName')}")
-            print(f"AssessmentType: {data.get('assessmentType')}")
             img_res = data.get('imageAnalysisResult') or {}
             predicted_class = img_res.get('predicted_class')
             confidence = img_res.get('confidence')

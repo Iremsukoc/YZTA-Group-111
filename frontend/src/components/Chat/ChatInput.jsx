@@ -4,12 +4,11 @@ import plusIcon from '../../assets/plus-icon.svg';
 import microphoneIcon from '../../assets/microphone-icon.svg';
 import sendIcon from '../../assets/send-icon.svg';
 
-
 function ChatInput({ onSendMessage, onImageSelected, isLoading, isImageUploadAllowed }) {
   const [inputValue, setInputValue] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const textareaRef = useRef(null);
-  const InputRef = useRef(null);
+  const fileInputRef = useRef(null);
   const uploadButtonRef = useRef(null);
   const [showUploadMenu, setShowUploadMenu] = useState(false);
 
@@ -23,23 +22,21 @@ function ChatInput({ onSendMessage, onImageSelected, isLoading, isImageUploadAll
 
   useEffect(() => {
     if (!isLoading && textareaRef.current) {
-     textareaRef.current.focus();
+      textareaRef.current.focus();
     }
   }, [isLoading]);
-    
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLoading) return;
-  
+
     if (selectedFile) {
       if (onImageSelected) {
         await onImageSelected(selectedFile);
       }
       setSelectedFile(null);
       setInputValue('');
-    } 
-    else if (inputValue.trim()) {
+    } else if (inputValue.trim()) {
       onSendMessage(inputValue);
       setInputValue('');
       if (textareaRef.current) {
@@ -47,7 +44,6 @@ function ChatInput({ onSendMessage, onImageSelected, isLoading, isImageUploadAll
       }
     }
   };
-  
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -71,30 +67,39 @@ function ChatInput({ onSendMessage, onImageSelected, isLoading, isImageUploadAll
       setInputValue(`Seçilen dosya: ${file.name}`);
     }
   };
-  
+
+  const startDictation = () => {
+    if (!('webkitSpeechRecognition' in window)) return;
+
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onresult = function (event) {
+      setInputValue(prev => prev + ' ' + event.results[0][0].transcript);
+      recognition.stop();
+    };
+
+    recognition.onerror = function () {
+      recognition.stop();
+    };
+
+    recognition.start();
+  };
+
   const hasText = inputValue.trim().length > 0;
 
   return (
     <div className={styles.inputContainer} style={{ position: 'relative' }}>
-      {isImageUploadAllowed ? (
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className={styles.visibleFileInput}
-          disabled={isLoading}
-        />
-      ) : (
-        <input
-          type="file"
-          accept="image/*"
-          ref={InputRef}
-          style={{ display: 'none' }}
-          onChange={handleFileChange}
-          disabled={isLoading}
-        />
-      )}
-
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+        disabled={isLoading}
+      />
 
       {showUploadMenu && (
         <div
@@ -110,7 +115,7 @@ function ChatInput({ onSendMessage, onImageSelected, isLoading, isImageUploadAll
             onClick={handleUploadClick}
             disabled={isLoading || !isImageUploadAllowed} 
           >
-            📎 Fotoğraf veya dosya ekle
+            📌 Fotoğraf veya dosya ekle
           </button>
         </div>
       )}
@@ -136,11 +141,12 @@ function ChatInput({ onSendMessage, onImageSelected, isLoading, isImageUploadAll
           >
             <img src={plusIcon} alt="Attach file" />
           </button>
-          
+
           <div className={styles.rightButtonsContainer}>
             <button 
               type="button" 
               className={`${styles.iconButton} ${styles.microphoneButton}`} 
+              onClick={startDictation}
               disabled={isLoading} 
             >
               <img src={microphoneIcon} alt="Use microphone" />
