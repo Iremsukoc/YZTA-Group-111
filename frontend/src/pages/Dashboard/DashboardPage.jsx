@@ -1,16 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase.js';
 import styles from './DashboardPage.module.css';
 import ResumeModal from '../../components/ResumeModal/ResumeModal';
 
 function DashboardPage() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const firstName = currentUser?.reloadUserInfo?.customAttributes ? JSON.parse(currentUser.reloadUserInfo.customAttributes).firstName : 'User';
-
+  const [userData, setUserData] = useState(null);
   const [ongoingAssessments, setOngoingAssessments] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
+
+  // Fetch user data from Firestore
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (currentUser) {
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+          setUserData(userDoc.data());
+        }
+      }
+    };
+    fetchUserData();
+  }, [currentUser]);
+
+  // Fallback to Firebase Auth custom attributes if Firestore data is not available
+  const firstName = userData?.first_name || (currentUser?.reloadUserInfo?.customAttributes ? JSON.parse(currentUser.reloadUserInfo.customAttributes).firstName : 'User');
 
   useEffect(() => {
     const fetchOngoingAssessments = async () => {

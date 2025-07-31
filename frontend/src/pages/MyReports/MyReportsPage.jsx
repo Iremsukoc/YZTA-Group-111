@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase.js';
 import styles from './MyReportsPage.module.css';
 import ReportCard from '../../components/ReportCard/ReportCard';
 import { fetchReportSummaries, startNewAssessment } from '../../api/AssessmentApi';
@@ -12,11 +14,27 @@ Chart.register(ArcElement, Tooltip, Legend);
 function MyReportsPage() {
   const { currentUser } = useAuth();
   const [reports, setReports] = useState([]);
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
-  const firstName = currentUser?.reloadUserInfo?.customAttributes
+  // Fetch user data from Firestore
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (currentUser) {
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+          setUserData(userDoc.data());
+        }
+      }
+    };
+    fetchUserData();
+  }, [currentUser]);
+
+  // Fallback to Firebase Auth custom attributes if Firestore data is not available
+  const firstName = userData?.first_name || (currentUser?.reloadUserInfo?.customAttributes
     ? JSON.parse(currentUser.reloadUserInfo.customAttributes).firstName
-    : 'User';
+    : 'User');
 
   useEffect(() => {
     const loadReports = async () => {
@@ -75,7 +93,7 @@ function MyReportsPage() {
     <div className={styles.dashboardPage}>
       <header className={styles.header}>
         <div className={styles.welcomeMessage}>
-          <h2>Welcome back, {firstName}!</h2>
+          <h2>Hello, {firstName}</h2>
           <p>Here is your health overview and recent reports.</p>
         </div>
         <button className={styles.newAssessmentBtn} onClick={handleStartAssessment}>
