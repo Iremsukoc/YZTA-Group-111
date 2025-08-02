@@ -12,9 +12,11 @@ function ReportCard({ report }) {
   };
 
   const getRiskClass = () => {
-    if (riskLevel === 'High') return styles.highRisk;
-    if (riskLevel === 'Medium') return styles.mediumRisk;
-    return styles.lowRisk;
+    if (riskLevel === 'High Risk') return styles.highRisk;
+    if (riskLevel === 'Moderate Risk') return styles.mediumRisk;
+    if (riskLevel === 'Low Risk') return styles.lowRisk;
+    if (riskLevel === 'No Risk') return styles.noneRisk;
+    return styles.lowRisk; // Default for Unknown
   };
 
   return (
@@ -32,7 +34,7 @@ function ReportCard({ report }) {
       {status === 'completed' ? (
         <div className={`${styles.risk} ${getRiskClass()}`}>
           <span className={styles.riskDot}></span>
-          {riskLevel} Risk
+          {riskLevel}
 
         </div>
       ) : (

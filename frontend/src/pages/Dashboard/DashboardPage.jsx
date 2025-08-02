@@ -40,10 +40,7 @@ function DashboardPage() {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log("All assessments:", data);
-          // Filter out completed assessments
           const ongoing = data.filter(assessment => assessment.status !== 'completed');
-          console.log("Ongoing assessments:", ongoing);
           setOngoingAssessments(ongoing);
         }
       } catch (error) {
@@ -74,13 +71,6 @@ function DashboardPage() {
       }
 
       const data = await response.json();
-
-      console.log("--- DEBUG ---");
-      console.log("Backend'den Gelen Yanıt (data):", data);
-      console.log("Alınan ID (data.assessment_id):", data.assessment_id);
-      console.log("Yönlendirilecek URL:", `/assessment/${data.assessment_id}`);
-      console.log("--- DEBUG SONU ---");
-      
       navigate(`/assessment/${data.assessment_id}`);
 
     } catch (error) {
@@ -90,9 +80,7 @@ function DashboardPage() {
   };
 
   const handleSmartButton = () => {
-    console.log("handleSmartButton called, ongoingAssessments:", ongoingAssessments);
     if (ongoingAssessments.length > 0) {
-      console.log("Opening modal");
       setModalOpen(true);
     } else {
       console.log("Starting new assessment");

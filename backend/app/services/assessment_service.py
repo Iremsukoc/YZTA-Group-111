@@ -19,6 +19,55 @@ def convert_numpy(obj):
     else:
         return obj
 
+def map_risk_level_by_diagnosis(predicted_class, cancer_type):
+    """Map predicted class and cancer type to risk level based on medical classification."""
+    if not predicted_class or not cancer_type:
+        return 'Unknown'
+
+    risk_map = {
+        'skin': {
+            'malignant': 'High Risk',
+            'benign': 'Low Risk',
+        },
+        'lung': {
+            'malignant': 'High Risk',
+            'benign': 'Low Risk',
+            'normal': 'No Risk',
+        },
+        'leukemia': {
+            'pro': 'Moderate Risk',
+            'pre': 'Moderate Risk',
+            'early': 'High Risk',
+            'benign': 'Low Risk',
+        },
+        'colon': {
+            'adenocarcinoma': 'High Risk',
+            'benign': 'Low Risk',
+        },
+        'breast': {
+            'malignant': 'High Risk',
+            'benign': 'Low Risk',
+            'normal': 'No Risk',
+        },
+        'brain': {
+            'malignant': 'High Risk',
+            'glioma': 'High Risk',
+            'pituitary': 'Moderate Risk',
+            'meningioma': 'Moderate Risk',
+            'no tumour': 'No Risk',
+        },
+        'general_test': {
+            'malignant': 'High Risk',
+            'benign': 'Low Risk',
+            'normal': 'No Risk',
+        },
+    }
+
+    type_key = cancer_type.lower()
+    label_key = predicted_class.lower()
+
+    return risk_map.get(type_key, {}).get(label_key, 'Unknown')
+
 
 class AssessmentService:
     def __init__(self):
@@ -240,23 +289,24 @@ class AssessmentService:
         docs = query.stream()
         results = []
 
-        def to_risk(conf):
-            if conf is None:
-                return None
-            if conf >= 80:
-                return "High Risk"
-            elif conf >= 50:
-                return "Medium Risk"
-            return "Low Risk"
-
         for doc in docs:
             data = doc.to_dict()
             img_res = data.get('imageAnalysisResult') or {}
             predicted_class = img_res.get('predicted_class')
             confidence = img_res.get('confidence')
+            cancer_type = data.get('assessmentType') or data.get('suspectedCancerType')
+
+
 
             created_at = data.get('createdAt')
             updated_at = data.get('updatedAt')
+
+            if predicted_class and cancer_type:
+                risk_level = map_risk_level_by_diagnosis(predicted_class, cancer_type)
+            else:
+                risk_level = 'Unknown'
+            
+
 
             results.append({
                 "assessment_id": doc.id,
@@ -267,7 +317,7 @@ class AssessmentService:
                 "updated_at": updated_at.isoformat() if hasattr(updated_at, "isoformat") else str(updated_at),
                 "predicted_class": predicted_class,
                 "confidence": confidence,
-                "risk_level": to_risk(confidence),
+                "risk_level": risk_level,
                 "can_continue": data.get('status') != 'completed'
             })
         return results
@@ -286,8 +336,14 @@ class AssessmentService:
         
         created_at = data.get("createdAt")
         image_result = data.get("imageAnalysisResult") or {}
-        risk_level = image_result.get("predicted_class", "Unknown")
+        predicted_class = image_result.get("predicted_class")
         confidence = image_result.get("confidence")
+        cancer_type = data.get("assessmentType") or data.get("suspectedCancerType")
+
+        if predicted_class and cancer_type:
+            risk_level = map_risk_level_by_diagnosis(predicted_class, cancer_type)
+        else:
+            risk_level = 'Unknown'
 
         return {
             "assessment_id": assessment_id,
@@ -295,6 +351,7 @@ class AssessmentService:
             "assessmentName": data.get("assessmentName"),
             "assessment_type": data.get("assessmentType"),
             "created_at": str(created_at) if created_at else None,
+            "predicted_class": predicted_class,
             "risk_level": risk_level,
             "confidence": confidence,
             "status": data.get("status"),

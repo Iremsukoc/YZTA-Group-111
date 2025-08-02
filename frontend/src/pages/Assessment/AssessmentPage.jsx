@@ -27,7 +27,6 @@ function AssessmentPage() {
   const [assessmentDetail, setAssessmentDetail] = useState(null);
   const messageListRef = useRef(null);
 
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
@@ -51,7 +50,7 @@ function AssessmentPage() {
         const data = await fetchAssessmentDetail(assessmentId);
         const conv = data.conversation || [];
         
-        if (data.status === 'completed' && (data.risk_level || data.confidence != null)) {
+        if (data.status === 'completed' && (data.predicted_class || data.confidence != null)) {
           const hasDiagnosis = conv.some(m => m.type === 'diagnosis');
           if (!hasDiagnosis) {
             conv.push({
@@ -59,7 +58,7 @@ function AssessmentPage() {
               type: 'diagnosis',
               content: {
                 title: "Diagnosis Complete",
-                result: data.risk_level,
+                result: data.risk_level || 'Unknown',
                 confidence: data.confidence,
                 note: "Note: This is not a final diagnosis. Please consult a medical professional."
               }
@@ -98,9 +97,9 @@ function AssessmentPage() {
       case "triage_in_progress":
         return "🔍 Stage 2: Triage Assessment";
       case "detailed_qa_in_progress":
-        return "📋 Stage 3: Detailed Analysis";
+        return "📋 Stage 2: Detailed Analysis";
       case "awaiting_image":
-        return "📷 Stage 4: Image Upload and Analysis";
+        return "📷 Stage 3: Image Upload and Analysis";
       case "completed":
         return "✅ Assessment Completed";
       default:
@@ -153,11 +152,11 @@ function AssessmentPage() {
     formData.append('image_file', file);
     const validModels = ['brain', 'skin', 'breast', 'colon', 'lung', 'leukemia'];
     const mdl =
-    (assessmentDetail?.suspectedCancerType && validModels.includes(assessmentDetail.suspectedCancerType))
-      ? assessmentDetail.suspectedCancerType
-      : (assessmentDetail?.assessment_type && validModels.includes(assessmentDetail.assessment_type))
-      ? assessmentDetail.assessment_type
-      : 'brain';
+      (assessmentDetail?.suspectedCancerType && validModels.includes(assessmentDetail.suspectedCancerType))
+        ? assessmentDetail.suspectedCancerType
+        : (assessmentDetail?.assessment_type && validModels.includes(assessmentDetail.assessment_type))
+        ? assessmentDetail.assessment_type
+        : 'brain';
 
     formData.append('model_type', mdl);
     try {
@@ -239,5 +238,7 @@ function AssessmentPage() {
     </div>
   );
 }
+
+
 
 export default AssessmentPage;

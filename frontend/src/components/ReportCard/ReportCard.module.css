@@ -66,25 +66,33 @@
 }
 
 .highRisk {
-  color: #D9534F;
+  color: #E63946;
 }
 .highRisk .riskDot {
-  background-color: #D9534F;
+  background-color: #E63946;
 }
 
 .mediumRisk {
-  color: #F0AD4E;
+  color: #F4A261;
 }
 .mediumRisk .riskDot {
-  background-color: #F0AD4E;
+  background-color: #F4A261;
 }
 
 .lowRisk {
-  color: #5CB85C;
+  color: #2A9D8F;
 }
 .lowRisk .riskDot {
-  background-color: #5CB85C;
+  background-color: #2A9D8F;
 }
+
+.noneRisk {
+  color: #BDBDBD;
+}
+.noneRisk .riskDot {
+  background-color: #BDBDBD;
+}
+
 
 .incompleteBadge {
   background: #fff3cd;

@@ -61,7 +61,7 @@ def _normalize_llm_output(llm_out: dict) -> dict:
     return out
 
 def get_llm_response(assessment: dict) -> dict:
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    model = genai.GenerativeModel('gemini-2.5-pro')
     history = assessment.get("conversation", [])
     status = assessment.get("status", "general_test_in_progress")
 

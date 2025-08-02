@@ -17,7 +17,6 @@ function MyReportsPage() {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
-  // Fetch user data from Firestore
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
@@ -31,7 +30,6 @@ function MyReportsPage() {
     fetchUserData();
   }, [currentUser]);
 
-  // Fallback to Firebase Auth custom attributes if Firestore data is not available
   const firstName = userData?.first_name || (currentUser?.reloadUserInfo?.customAttributes
     ? JSON.parse(currentUser.reloadUserInfo.customAttributes).firstName
     : 'User');
@@ -40,6 +38,7 @@ function MyReportsPage() {
     const loadReports = async () => {
       try {
         const data = await fetchReportSummaries();
+
         setReports(data);
       } catch (error) {
         console.error("Raporlar alınamadı:", error);
@@ -59,26 +58,28 @@ function MyReportsPage() {
 
   const riskCounts = reports.reduce(
     (acc, report) => {
-      if (report.risk_level === 'High Risk') acc.high++;
-      else if (report.risk_level === 'Medium Risk') acc.medium++;
-      else if (report.risk_level === 'Low Risk') acc.low++;
+      const level = report.risk_level;
+      if (level === 'High Risk') acc.high++;
+      else if (level === 'Moderate Risk') acc.medium++;
+      else if (level === 'Low Risk') acc.low++;
+      else if (level === 'No Risk') acc.none++;
       return acc;
     },
-    { high: 0, medium: 0, low: 0 }
+    { high: 0, medium: 0, low: 0, none: 0 }
   );
 
   const chartData = {
     datasets: [
       {
-        data: [riskCounts.high, riskCounts.medium, riskCounts.low],
-        backgroundColor: ['#EB5757', '#F2994A', '#27AE60'],
+        data: [riskCounts.high, riskCounts.medium, riskCounts.low, riskCounts.none],
+        backgroundColor: ['#E63946', '#F4A261', '#2A9D8F', '#BDBDBD'],
         borderColor: ['#ffffff'],
         borderWidth: 4,
         borderRadius: 10,
         cutout: '75%',
       },
     ],
-    labels: ['High Risk', 'Medium Risk', 'Low Risk'],
+    labels: ['High Risk', 'Moderate Risk', 'Low Risk', 'No Risk'],
   };
 
   const chartOptions = {
@@ -114,7 +115,7 @@ function MyReportsPage() {
                   id: report.assessment_id,
                   title: report.title || report.assessmentName || report.assessment_name || report.assessment_type,
                   date: new Date(report.created_at).toLocaleDateString(),
-                  riskLevel: report.risk_level?.split(' ')[0] || 'Unknown',
+                  riskLevel: report.risk_level || 'Unknown',
                   status: report.status,
                   canContinue: report.can_continue,
                   confidence: report.confidence,  
@@ -137,5 +138,7 @@ function MyReportsPage() {
     </div>
   );
 }
+
+
 
 export default MyReportsPage;
