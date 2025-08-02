@@ -6,12 +6,12 @@ const faqData = [
   {
     id: 1,
     question: 'What is the purpose of this health assistant?',
-    answer: 'This AI-powered health assistant is designed for preliminary risk assessment of various cancer types based on user-provided symptoms and medical images. It is an informational tool and not a substitute for professional medical advice.'
+    answer: 'regAI is designed to assist users in evaluating potential cancer risks through a combination of AI-powered conversations and medical image analysis. It is not a substitute for professional medical advice but serves as an early awareness and guidance tool.'
   },
   {
     id: 2,
-    question: 'Is my personal data secure?',
-    answer: 'Yes, data privacy and security are our top priorities. Your personal data is only used for analysis and is processed in accordance with strict privacy principles. We do not share your data with external systems.'
+    question: 'How does the risk calculation work?',
+    answer: 'No. regAI is not a certified diagnostic tool. The results should not be interpreted as a definitive medical diagnosis. Always consult with a qualified healthcare provider for clinical assessment and treatment.'
   },
   {
     id: 3,
@@ -20,9 +20,35 @@ const faqData = [
   },
   {
     id: 4,
-    question: 'How does the risk calculation work?',
-    answer: 'The system uses a combination of a Large Language Model (LLM) to analyze symptoms from natural language, Machine Learning (ML) models to calculate risk scores based on questionnaire data, and Computer Vision (CV) models for image analysis. These results are combined to produce a comprehensive risk overview.'
-  }
+    question: 'What types of medical images are supported??',
+    answer: 'You can upload common imaging formats such as CT, MRI, X-ray, and PET/CT scans. These are processed by our AI model to detect signs of cancer or abnormal tissue patterns.'
+  },
+  {
+    id: 5,
+    question: 'Is my personal data secure?',
+    answer: 'Yes. We adhere to international data protection standards. All personal data and medical images are encrypted and used strictly for AI analysis within the application. No data is shared with third parties.'
+  },
+  {
+    id: 6,
+    question: 'What happens to my images after analysis?',
+    answer: 'Uploaded images are processed and then securely stored only if you give permission. Otherwise, they are automatically deleted after analysis is complete.'
+  },
+  {
+    id: 7,
+    question: 'Can the AI assistant understand complex or vague symptoms?',
+    answer: 'Yes. Our LLM (Gemini 2.5 Pro) is capable of interpreting natural language and follows up with more specific questions to guide you through a medically relevant assessment path.'
+  },
+  {
+    id: 8,
+    question: 'Will I be contacted by a real doctor?',
+    answer: 'Not directly through regAI. However, if your risk level is high, the system can guide you toward scheduling an appointment with the appropriate specialist.'
+  },
+  {
+    id: 9,
+    question: 'Which cancers does the system cover?',
+    answer: 'Currently, regAI focuses on the early detection of common cancers such as lung, brain, breast, skin, colon and leukemia cancer. Support for more types is being added over time.'
+  },
+  
 ];
 
 function FaqPage() {

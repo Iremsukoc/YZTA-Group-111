@@ -38,7 +38,6 @@ function MyReportsPage() {
     const loadReports = async () => {
       try {
         const data = await fetchReportSummaries();
-
         setReports(data);
       } catch (error) {
         console.error("Raporlar alınamadı:", error);

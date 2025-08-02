@@ -67,6 +67,12 @@ def get_llm_response(assessment: dict) -> dict:
 
     history_str = json.dumps(history, indent=2, default=str)
 
+    if len(history) == 1 and history[0]["role"] == "user":
+        return {
+            "response": "Hello! I'm here to help you understand what might be going on. Before you describe your symptoms, I have a few questions for you. May I ask them?",
+            "next_step": "general_test_in_progress"
+        }
+
     try:
         if status == "general_test_in_progress":
             prompt = general_test_chat_llm_prompt + "\n\n---\n\nConversation History:\n" + history_str
@@ -81,7 +87,16 @@ def get_llm_response(assessment: dict) -> dict:
         response = model.generate_content(prompt)
         raw_text = response.text.strip() if hasattr(response, "text") else ""
         parsed = _extract_json(raw_text)
-        return _normalize_llm_output(parsed)
+        normalized = _normalize_llm_output(parsed)
+        
+        if normalized.get("next_step") == "request_image" and not normalized.get("response"):
+            cancer_type = normalized.get("cancer_type", "the area")
+            normalized["response"] = (
+                "Thank you for sharing all your answers. "
+                "The final step is to analyze a medical image. "
+                f"Please upload a clear photo of the affected area."
+            )
+        return normalized
 
     except Exception as e:
         print("LLM Status:", status)

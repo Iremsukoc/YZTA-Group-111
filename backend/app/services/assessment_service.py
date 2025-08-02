@@ -30,15 +30,15 @@ def map_risk_level_by_diagnosis(predicted_class, cancer_type):
             'benign': 'Low Risk',
         },
         'lung': {
-            'malignant': 'High Risk',
-            'benign': 'Low Risk',
-            'normal': 'No Risk',
+            'malignant cases': 'High Risk',
+            'benign cases': 'Low Risk',
+            'normal cases': 'No Risk',
         },
         'leukemia': {
-            'pro': 'Moderate Risk',
-            'pre': 'Moderate Risk',
-            'early': 'High Risk',
-            'benign': 'Low Risk',
+            't-cell': 'High Risk',
+            'pre b-cell': 'Moderate Risk',
+            'early t-cell': 'High Risk',
+            'b-cell': 'Low Risk',
         },
         'colon': {
             'adenocarcinoma': 'High Risk',
@@ -60,6 +60,9 @@ def map_risk_level_by_diagnosis(predicted_class, cancer_type):
             'malignant': 'High Risk',
             'benign': 'Low Risk',
             'normal': 'No Risk',
+            'meningioma': 'Moderate Risk',
+            'glioma': 'High Risk',
+            'pituitary': 'Moderate Risk',
         },
     }
 
@@ -294,7 +297,8 @@ class AssessmentService:
             img_res = data.get('imageAnalysisResult') or {}
             predicted_class = img_res.get('predicted_class')
             confidence = img_res.get('confidence')
-            cancer_type = data.get('assessmentType') or data.get('suspectedCancerType')
+            # Use suspectedCancerType if available, otherwise fall back to assessmentType
+            cancer_type = data.get('suspectedCancerType') or data.get('assessmentType')
 
 
 
@@ -305,6 +309,8 @@ class AssessmentService:
                 risk_level = map_risk_level_by_diagnosis(predicted_class, cancer_type)
             else:
                 risk_level = 'Unknown'
+            
+
             
 
 
@@ -338,7 +344,8 @@ class AssessmentService:
         image_result = data.get("imageAnalysisResult") or {}
         predicted_class = image_result.get("predicted_class")
         confidence = image_result.get("confidence")
-        cancer_type = data.get("assessmentType") or data.get("suspectedCancerType")
+        # Use suspectedCancerType if available, otherwise fall back to assessmentType
+        cancer_type = data.get("suspectedCancerType") or data.get("assessmentType")
 
         if predicted_class and cancer_type:
             risk_level = map_risk_level_by_diagnosis(predicted_class, cancer_type)

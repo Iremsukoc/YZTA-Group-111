@@ -69,7 +69,7 @@ MODEL_CONFIG = {
         'model_path': 'colon/model_cnn.h5',
         'input_shape': (224, 224),
         'color_mode': 'rgb',
-        'class_names': ['Benign', 'Malignant'],
+        'class_names': ['Benign', 'adenocarcinoma'],
         'framework': 'tensorflow'
     }
 }
