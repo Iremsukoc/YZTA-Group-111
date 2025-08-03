@@ -132,3 +132,17 @@
   background-color: #c7d2fe;
 }
 
+@media (max-width: 600px) {
+  .modal, .resumeModal {
+    max-width: 92vw;
+    width: 100%;
+    margin: 24px auto;
+    left: unset;
+    right: unset;
+    transform: none;
+    border-radius: 20px;
+  }
+}
+
+
+

@@ -19,6 +19,8 @@ function SignUpPage() {
     const [strength, setStrength] = useState({ score: 0, text: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -80,8 +82,13 @@ function SignUpPage() {
                 }
             }
             
-            alert('Your account has been created successfully! You can now log in.');
-            navigate('/login');
+            setToastMessage('Your account has been created successfully! You can now log in.');
+            setShowToast(true);
+            setTimeout(() => {
+                setShowToast(false);
+                navigate('/login');
+            }, 3500);
+            
 
         } catch (err) {
             setError(err.message); 
@@ -98,6 +105,9 @@ function SignUpPage() {
 
     return (
         <div className={styles.pageContainer}>
+            {showToast && (
+                <div className={styles.toast}>{toastMessage}</div>
+            )}
             <div className={styles.signupContainer}>
             <div className={styles.logoWrapper}>
                 <img className={styles.logoImage} src={logoRegAI} alt="regAI Logo" />

@@ -5,10 +5,11 @@ import MessagePopup from '../MessagePopup/MessagePopup';
 import styles from './Layout.module.css';
 
 import hamburgerIcon from '../../assets/hamburger-icon.svg';
+import logoRegAI from '../../assets/logo-regai.png';
 
 const MobileHeader = ({ onMenuClick }) => (
   <header className={styles.mobileHeader}>
-    <div className={styles.logo}>HEALTH</div>
+    <img src={logoRegAI} alt="regAI Logo" className={styles.logoImage} />
     <button className={styles.hamburgerButton} onClick={onMenuClick}>
       <img src={hamburgerIcon} alt="Open menu" />
     </button>
