@@ -62,14 +62,14 @@ MODEL_CONFIG = {
         'model_path': 'leukemia/models/resnet50.h5',
         'input_shape': (224, 224),
         'color_mode': 'rgb',
-        'class_names': ['B-Cell', 'Early T-Cell', 'Pre B-Cell', 'T-Cell'],
+        'class_names': ['Benign', 'Early', 'Pre', 'Pro'],
         'framework': 'tensorflow'
     },
     'colon': {
         'model_path': 'colon/model_cnn.h5',
         'input_shape': (224, 224),
         'color_mode': 'rgb',
-        'class_names': ['Benign', 'adenocarcinoma'],
+        'class_names': ['Colon_adenocarcinoma', 'Colon_benign_tissue'],
         'framework': 'tensorflow'
     }
 }
@@ -114,7 +114,15 @@ class CancerPredictor:
                 img_size = config['input_shape']
                 color_mode = config.get('color_mode', 'rgb')
                 img = load_img(image_path, target_size=img_size, color_mode=color_mode)
-                img_array = img_to_array(img) / 255.0
+                img_array = img_to_array(img)
+                
+                # Apply ResNet50 preprocessing for leukemia model
+                if cancer_type == 'leukemia':
+                    from tensorflow.keras.applications.resnet50 import preprocess_input
+                    img_array = preprocess_input(img_array)
+                else:
+                    img_array = img_array / 255.0
+                    
                 img_array = np.expand_dims(img_array, axis=0)
 
                 predictions = model.predict(img_array)[0]

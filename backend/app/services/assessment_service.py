@@ -35,14 +35,14 @@ def map_risk_level_by_diagnosis(predicted_class, cancer_type):
             'normal cases': 'No Risk',
         },
         'leukemia': {
-            't-cell': 'High Risk',
-            'pre b-cell': 'Moderate Risk',
-            'early t-cell': 'High Risk',
-            'b-cell': 'Low Risk',
+            'pro': 'High Risk',
+            'pre': 'Moderate Risk',
+            'early': 'Low Risk',
+            'benign': 'Low Risk',
         },
         'colon': {
-            'adenocarcinoma': 'High Risk',
-            'benign': 'Low Risk',
+            'colon_adenocarcinoma': 'High Risk',
+            'colon_benign_tissue': 'Low Risk',
         },
         'breast': {
             'malignant': 'High Risk',
