@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import styles from './ProfilePage.module.css';
+import DeleteConfirmModal from '../../components/DeleteModal/DeleteConfirmModal.jsx';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase.js';
 
@@ -12,6 +13,7 @@ function PersonalDetails() {
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState(userData);
   const [popup, setPopup] = useState({ show: false, message: '', type: '' });
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 
   useEffect(() => {
@@ -55,7 +57,6 @@ function PersonalDetails() {
   };
 
   const handleDeleteAccount = async () => {
-    if (!window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) return;
     
     if (!currentUser) {
         setPopup({ show: true, message: 'You must be logged in.', type: 'error' });
@@ -139,8 +140,24 @@ function PersonalDetails() {
           <h3>Delete Account</h3>
           <p>Once you delete your account, there is no going back. Please be certain.</p>
         </div>
-        <button type="button" className={styles.deleteButton} onClick={handleDeleteAccount}>Delete my account</button>
+        <button
+          type="button"
+          className={styles.deleteButton}
+          onClick={() => setShowDeleteModal(true)}
+        >
+          Delete my account
+        </button>
+
+        <DeleteConfirmModal
+          isOpen={showDeleteModal}
+          onClose={() => setShowDeleteModal(false)}
+          onConfirm={() => {
+            setShowDeleteModal(false);
+            handleDeleteAccount();
+          }}
+        />
       </section>
+
     </>
   );
 }
