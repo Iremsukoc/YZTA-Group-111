@@ -28,3 +28,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.vscode/
+*.zip
+yapi.txt
+package-lock.json
+

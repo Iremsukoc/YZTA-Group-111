@@ -95,3 +95,36 @@
   transform: scale(0.5);
   pointer-events: none;
 }
+
+.uploadMenu {
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 8px;
+  z-index: 999;
+  min-width: 220px;
+}
+
+.uploadMenu button {
+  background: none;
+  border: none;
+  padding: 8px 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+}
+
+.uploadMenu button:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.visibleFileInput {
+  margin-bottom: 10px;
+  display: none;
+}
+
+

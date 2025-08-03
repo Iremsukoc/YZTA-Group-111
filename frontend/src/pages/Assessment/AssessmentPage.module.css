@@ -73,3 +73,39 @@
   color: #34495e; 
   max-width: 400px;
 }
+
+.assessmentComplete {
+  margin: 10px auto;
+  max-width: 600px;
+  background-color: #e0f7fa;
+  color: #006064;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: fadeInUp 0.4s ease;
+}
+
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.phaseInfo {
+  margin: 10px 0;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 16px;
+  color: #357ABD;
+}
+

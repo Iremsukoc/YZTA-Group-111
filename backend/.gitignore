@@ -39,3 +39,10 @@ node_modules/
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Model dosyaları
+*.pt
+*.pth
+*.h5
+models/
+weights/

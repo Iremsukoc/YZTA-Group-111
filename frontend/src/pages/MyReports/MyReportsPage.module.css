@@ -78,7 +78,18 @@
 .reportsList {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.reportsList::-webkit-scrollbar {
+  width: 6px;
+}
+.reportsList::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 .riskOverview {

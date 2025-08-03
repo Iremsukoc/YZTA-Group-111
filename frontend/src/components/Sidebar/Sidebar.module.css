@@ -8,6 +8,7 @@
   height: calc(100vh - 48px);
   position: sticky;
   top: 24px;
+  margin-left: 16px;
 }
 
 @media (max-width: 992px) {
@@ -85,7 +86,7 @@
 }
 
 .logoImage {
-  height: 100px;
+  height: 55px;
   width: auto;
   display: block;
   margin: 0 auto;

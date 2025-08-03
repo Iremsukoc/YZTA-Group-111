@@ -1,0 +1,34 @@
+.uploadPrompt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f1f5f9; /* soft grey */
+    border-radius: 12px;
+    padding: 10px 16px;
+    width: fit-content;
+    max-width: 300px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin: 12px 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .uploadPrompt:hover {
+    background-color: #e2e8f0;
+  }
+  
+  .imageIcon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .hiddenInput {
+    display: none;
+  }
+  
+  .uploadText {
+    font-size: 14px;
+    color: #374151;
+  }
+  

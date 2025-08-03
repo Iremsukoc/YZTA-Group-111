@@ -31,7 +31,7 @@
   }
 
   .logoImage {
-    height: 120px;
+    height: 70px;
     width: auto;
     display: block;
     margin: 0 auto;
@@ -218,4 +218,30 @@
   .googleIcon {
     width: 20px;
     height: 20px;
+  }
+
+  .toast {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #4A90E2;;
+    color: #fff;
+    padding: 18px 32px;
+    border-radius: 8px;
+    font-size: 18px;
+    z-index: 10000;
+    opacity: 0.95;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    animation: toast-fadein 0.4s, toast-fadeout 0.5s 3s forwards;
+  }
+  
+  @keyframes toast-fadein {
+    from { opacity: 0; }
+    to { opacity: 0.95; }
+  }
+  
+  @keyframes toast-fadeout {
+    from { opacity: 0.95; }
+    to { opacity: 0; }
   }

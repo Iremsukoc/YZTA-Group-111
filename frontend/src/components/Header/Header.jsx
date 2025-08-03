@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
-import logoRegAI from '../../assets/logo-regai-header.png';
+import logoRegAI from '../../assets/logo-regai.png';
 
 
 function Header() {
