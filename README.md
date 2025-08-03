@@ -1,8 +1,11 @@
 
 # REGAI
 
-**Product Name:** RegAI  
+**Product Name:** RegAI 
 **Backlog URL:** [Asana Project Board](https://app.asana.com/1/1205900998273390/project/1210594927472810/list/1210595154454975)  
+
+---
+**Product Logo:**  ![RegAI Logo](docs-images/sprints/logo/regai-logo.jpg)
 
 ---
 
@@ -116,7 +119,7 @@ ied cancer type.
       </td>
     </tr>
     <tr>
-      <td>Ali İhsan Acar</td>
+      <td>Ali İhsan Sancar</td>
       <td>Developer</td>
       <td>
         <a href="https://github.com/alihsancar" target="_blank"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="20" height="20"/></a>
@@ -134,6 +137,19 @@ ied cancer type.
 </table>
 
 ---
+
+The backend and frontend working logic has been prepared in the main branch of the project, with the necessary services and controllers added for LLM and ML models to function. You can understand how to start the project by reading the `README.md` files inside the backend and frontend folders.
+
+If you want to examine how the models are trained, you can check the following branches within the same GitHub project:
+
+- **[Breast Cancer](https://github.com/Iremsukoc/YZTA-Group-111/tree/ml-1.0.2/breast-cancer-image-classification)**
+- **[Brain Tumor](https://github.com/Iremsukoc/YZTA-Group-111/tree/ml-2.0.1/brain-tumor-image-classification)**
+- **[Skin Cancer](https://github.com/Iremsukoc/YZTA-Group-111/tree/ml-2.0.1/skin-cancer-image-classification)**
+- **[Colon Cancer](https://github.com/Iremsukoc/YZTA-Group-111/tree/ml-2.0.2/colon-cancer-classification)**
+- **[Leukemia](https://github.com/Iremsukoc/YZTA-Group-111/tree/ml-2.0.2/leukemia-classification)**
+- **[Lung Cancer](https://github.com/Iremsukoc/YZTA-Group-111/tree/ml-2.0.2/lung-cancer-classification)**
+
+Each branch contains machine learning models and training processes specifically developed for the related disease type.
 
 <br></br>
 
@@ -243,14 +259,14 @@ Initially, WhatsApp was used for Daily Scrum notifications and tracking. However
 Responses submitted through the form are automatically collected and stored in a Google Sheet, providing a centralized and easily accessible record. This approach has made daily progress tracking more transparent and systematic.
 
 **WhatsApp Screenshot:**  
-![WhatsApp Daily Scrum - 1](docs-images/sprint-1/daily-scrum/daily-scrum-wp-1.png)
+![WhatsApp Daily Scrum - 1](docs-images/sprints/daily-scrum/daily-scrum-wp-1.png)
 
-![WhatsApp Daily Scrum - 2](docs-images/sprint-1/daily-scrum/daily-scrum-wp-2.png)
+![WhatsApp Daily Scrum - 2](docs-images/sprints/daily-scrum/daily-scrum-wp-2.png)
 
 **Google Form Screenshot:**  
-![Google Form Daily Scrum](docs-images/sprint-1/daily-scrum/daily-scrum-google-form.png)
+![Google Form Daily Scrum](docs-images/sprints/daily-scrum/daily-scrum-google-form.png)
 
-![Google Form Daily Scrum Responses](docs-images/sprint-1/daily-scrum/daily-scrum-google-form-response.png)
+![Google Form Daily Scrum Responses](docs-images/sprints/daily-scrum/daily-scrum-google-form-response.png)
 
 </details>
 
@@ -263,11 +279,11 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 **Sprint Board Screenshots:**  
 
-![Sprint Board - 1](docs-images/sprint-1/sprint-board/sprint-board-1.png)
+![Sprint Board - 1](docs-images/sprints/sprint-board/sprint-board-1.png)
 
-![Sprint Board - 2](docs-images/sprint-1/sprint-board/sprint-board-2.png)
+![Sprint Board - 2](docs-images/sprints/sprint-board/sprint-board-2.png)
 
-![Sprint Board - 3](docs-images/sprint-1/sprint-board/sprint-board-3.png)
+![Sprint Board - 3](docs-images/sprints/sprint-board/sprint-board-3.png)
 
 
 </details>
@@ -280,11 +296,11 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 <details><summary><strong style="font-size:1em">Frontend</strong></summary>
 
-![Main Page](docs-images/sprint-1/product/frontend/main-page.png)
+![Main Page](docs-images/sprints/product/frontend/main-page.png)
 
-![Login Page](docs-images/sprint-1/product/frontend/login-page.png)
+![Login Page](docs-images/sprints/product/frontend/login-page.png)
 
-![Signup Page](docs-images/sprint-1/product/frontend/sign-up-page.png)
+![Signup Page](docs-images/sprints/product/frontend/sign-up-page.png)
 
 </details>
 
@@ -292,13 +308,13 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 <details><summary><strong style="font-size:1em">Backend</strong></summary>
 
-![Firebase User Table](docs-images/sprint-1/product/backend/firebase-table.jpeg)
+![Firebase User Table](docs-images/sprints/product/backend/firebase-table.jpeg)
 
-![Signup Process](docs-images/sprint-1//product/backend/sign-up-process.jpeg)
+![Signup Process](docs-images/sprints//product/backend/sign-up-process.jpeg)
 
-![Signup DB Output](docs-images/sprint-1/product/backend/sign-up-db-output.jpeg)
+![Signup DB Output](docs-images/sprints/product/backend/sign-up-db-output.jpeg)
 
-![Auth Header Token After Login Successfully](docs-images/sprint-1/product/backend/auth-token-after-login.jpeg)
+![Auth Header Token After Login Successfully](docs-images/sprints/product/backend/auth-token-after-login.jpeg)
 
 </details>
 
@@ -306,9 +322,9 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 <details><summary><strong style="font-size:1em">Machine Model</strong></summary>
 
-![Machine Model Result](docs-images/sprint-1/product/ml/ml-breast-cancer-result.png)
+![Machine Model Result](docs-images/sprints/product/ml/ml-breast-cancer-result.png)
 
-![Machine Model Confusion Matrix](docs-images/sprint-1/product/ml/ml-breast-cancer-confusion-matrix.jpg)
+![Machine Model Confusion Matrix](docs-images/sprints/product/ml/ml-breast-cancer-confusion-matrix.jpg)
 
 </details>
 
@@ -316,9 +332,9 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 <details><summary><strong style="font-size:1em">Language Model (LLM)</strong></summary>
 
-![Language Model (LLM) Persona Response 1](docs-images/sprint-1/product/llm/llm-persona-response-1.jpg)
+![Language Model (LLM) Persona Response 1](docs-images/sprints/product/llm/llm-persona-response-1.jpg)
 
-![Language Model (LLM) Persona Response 2](docs-images/sprint-1/product/llm/llm-persona-response-2.jpg)
+![Language Model (LLM) Persona Response 2](docs-images/sprints/product/llm/llm-persona-response-2.jpg)
 
 </details>
 
@@ -500,14 +516,14 @@ Consequently, task time estimates and point allocation were prepared considering
 The daily scrum process, conducted via Google Form, was continued in this sprint because it had yielded high efficiency in previous sprint. Team members were encouraged to complete the forms daily with reminders sent via WhatsApp.
 
 **WhatsApp Screenshots:**  
-![WhatsApp Daily Scrum - 1](docs-images/sprint-1/daily-scrum/daily-scrum-wp-sprint2-1.png)
+![WhatsApp Daily Scrum - 1](docs-images/sprints/daily-scrum/daily-scrum-wp-sprint2-1.png)
 
 **Google Form Screenshot:**  
-![Google Form Daily Scrum](docs-images/sprint-1/daily-scrum/daily-scrum-google-form.png)
+![Google Form Daily Scrum](docs-images/sprints/daily-scrum/daily-scrum-google-form.png)
 
-![Google Form Daily Scrum Responses](docs-images/sprint-1/daily-scrum/daily-scrum-google-form-response-sprint2-1.png)
+![Google Form Daily Scrum Responses](docs-images/sprints/daily-scrum/daily-scrum-google-form-response-sprint2-1.png)
 
-![Google Form Daily Scrum Responses 2](docs-images/sprint-1/daily-scrum/daily-scrum-google-form-response-sprint2-2.png)
+![Google Form Daily Scrum Responses 2](docs-images/sprints/daily-scrum/daily-scrum-google-form-response-sprint2-2.png)
 
 </details>
 
@@ -520,9 +536,9 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 **Sprint Board Screenshots:**  
 
-![Sprint Board - 1](docs-images/sprint-1/sprint-board/sprint-board-sprint2-1.png)
+![Sprint Board - 1](docs-images/sprints/sprint-board/sprint-board-sprint2-1.png)
 
-![Sprint Board - 2](docs-images/sprint-1/sprint-board/sprint-board-sprint2-2.png)
+![Sprint Board - 2](docs-images/sprints/sprint-board/sprint-board-sprint2-2.png)
 
 </details>
 
@@ -534,17 +550,17 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 <details><summary><strong style="font-size:1em">Frontend</strong></summary>
 
-![Dasboard Page](docs-images/sprint-1/product/frontend/dasboard-page.png)
+![Dasboard Page](docs-images/sprints/product/frontend/dasboard-page.png)
 
-![Profile Page - 1](docs-images/sprint-1/product/frontend/profile-page-1.png)
+![Profile Page - 1](docs-images/sprints/product/frontend/profile-page-1.png)
 
-![Profile Page - 2](docs-images/sprint-1/product/frontend/profile-page-2.png)
+![Profile Page - 2](docs-images/sprints/product/frontend/profile-page-2.png)
 
-![Reports Page](docs-images/sprint-1/product/frontend/reports-page.png)
+![Reports Page](docs-images/sprints/product/frontend/reports-page.png)
 
-![FAQ Page](docs-images/sprint-1/product/frontend/faq-page.png)
+![FAQ Page](docs-images/sprints/product/frontend/faq-page.png)
 
-![FAQ Page](docs-images/sprint-1/product/frontend/support-pop-up.png)
+![FAQ Page](docs-images/sprints/product/frontend/support-pop-up.png)
 
 </details>
 
@@ -552,13 +568,13 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 
 <details><summary><strong style="font-size:1em">Backend</strong></summary>
 
-![Start Chat Session](docs-images/sprint-1/product/backend/start-chat-session.png)
+![Start Chat Session](docs-images/sprints/product/backend/start-chat-session.png)
 
-![Send Chat Message - 1](docs-images/sprint-1//product/backend/send-chat-message-1.png)
+![Send Chat Message - 1](docs-images/sprints//product/backend/send-chat-message-1.png)
 
-![Send Chat Message - 2](docs-images/sprint-1/product/backend/send-chat-message-2.png)
+![Send Chat Message - 2](docs-images/sprints/product/backend/send-chat-message-2.png)
 
-![Het Chat History](docs-images/sprint-1/product/backend/get-chat-history.png)
+![Het Chat History](docs-images/sprints/product/backend/get-chat-history.png)
 
 </details>
 
@@ -569,16 +585,16 @@ Below are the screenshots of the sprint board at different stages to illustrate 
 ---
 Colon Cancer : 
 
-![Machine Model Colon Cancer Classification Report](docs-images/sprint-1/product/ml/ml-colon-cancer-classification-report.png)
+![Machine Model Colon Cancer Classification Report](docs-images/sprints/product/ml/ml-colon-cancer-classification-report.png)
 
-![Machine Model Colon Cancer Confusion Matrix](docs-images/sprint-1/product/ml/ml-colon-cancer-confusion-matrix.png)
+![Machine Model Colon Cancer Confusion Matrix](docs-images/sprints/product/ml/ml-colon-cancer-confusion-matrix.png)
 
 ---
 Skin Cancer :
 
-![Machine Model Skin Cancer Classification Report](docs-images/sprint-1/product/ml/ml-skin-cancer-classification-report.png)
+![Machine Model Skin Cancer Classification Report](docs-images/sprints/product/ml/ml-skin-cancer-classification-report.png)
 
-![Machine Model Skin Cancer Confusion Matrix](docs-images/sprint-1/product/ml/ml-skin-cancer-confusion-matrix.png)
+![Machine Model Skin Cancer Confusion Matrix](docs-images/sprints/product/ml/ml-skin-cancer-confusion-matrix.png)
 
 </details>
 
@@ -642,6 +658,294 @@ The planned work for this sprint was largely completed, with notable progress an
 - **Team Communication:** Instant communication within the team is facilitated through WhatsApp.
 
 - **Daily Progress Tracking:**  Daily reporting is conducted through Google Forms. Each team member fills out a short form at the end of the day to report completed work and any encountered blockers.
+
+- **Weekly Meetings:** During the meetings, team members share what they have done, any problems they are facing, what they plan to do next, and what actions they will take before the next meeting. These online meetings are held twice a week (Mondays at 22:00 and Fridays at 22:00) via Google Meet.
+
+</details>
+
+</details>
+
+
+
+
+<details>
+<summary><strong style="font-size:4em">📋 Sprint 3</strong></summary>
+
+### **Sprint Duration**
+July 21, 2025 (Monday) - August 3, 2025 (Sunday) *(Two weeks)*
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Notes</strong></summary>
+
+#### Completed
+- The second LLM prompt was finalized and its structure completed.
+- A chat interface was added to the project. The integration of the second LLM prompt and related models was completed to support the chat functionality.
+- To avoid increasing the project size, models were uploaded to Google Drive and configured to be dynamically downloaded based on the chat flow.
+- The integration structure for the first LLM prompt was also updated, and all LLM-related integrations were finalized in this sprint.
+- Backend support for the support pop-up was implemented. User complaints and requests are now sent to a designated email address via Formspree.
+- The My Reports page was updated and finalized:
+  - Users can resume incomplete conversations from this page.
+  - They can view their full conversation history.
+  - Completed conversations now display a risk status: High / Medium / Low.
+  - The user's overall risk profile is visually presented using a donut chart on the right side of the page.
+  - A new assessment can be initiated using the "Start New Assessment" button.
+- A new project logo was added and visual updates were made.
+- LLM prompts were refined and comparative testing was conducted across Gemini models.
+- A FastAPI-based REST API was developed for colon, lung, and leukemia cancer types.
+- Frontend and backend integration was successfully completed.
+- The user interface was manually tested, and test scenarios were documented in a dedicated testing document. 
+
+---
+
+#### Challenges Encountered
+- The most significant challenge was the inconsistent behavior of the second LLM prompt. In some cases, the suspectedCancerType field was not properly identified within the chat flow, preventing the system from progressing to the final step—where the model analyzes the uploaded image and determines whether the cancer is benign or malignant. Additionally, the LLM sometimes failed to provide sufficiently coherent or meaningful responses.
+- Another challenge involved internal disagreements about the core product flow: whether the assessment should be conducted across multiple separate pages or within a single chat-based interface.
+
+---
+
+#### Solutions
+- Multiple variations of the second LLM prompt were tested, and the most effective version was selected and integrated into the project.
+- To resolve disagreements on the product structure, a small market and user behavior research study was conducted. Findings were shared with the Product Owner, and a chat-based user experience was chosen as the main interaction model for the assessment flow.
+
+---
+
+#### Lessons Learned
+- The prompt engineering process requires more trial and error than initially expected. Building flexible prompt strategies early on is essential.
+- Looking at existing solutions and real user behavior can help resolve internal conflicts about product design and improve decision-making.
+- Projects that involve both frontend and AI systems benefit greatly from simplified and well-defined workflows, which reduce the likelihood of integration issues down the line.  
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Estimated Completion Points</strong></summary>
+<strong> 48 points</strong>
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Estimation Logic</strong></summary>
+Sprint task estimation was based on <strong>hour-based workload</strong> estimates using the following methodology:
+
+| **Estimated Time** | **Story Points** |
+|:------------------:|:----------------:|
+| 1 day (8 hours) | 4 |
+| Half day (4 hours) | 2 |
+| 2 hours | 1 |
+| 1 hour and below | 0.5 |
+
+Due to team members' various responsibilities such as internships and work commitments, weekday working hours were expected to be more limited while weekends would be more intensive. Therefore, task time estimates and point allocation were planned considering this balance:
+
+- **Weekdays:** Typically 1-2 hour work blocks were planned
+- **Weekends:** Longer focused work sessions (4-5 hours) were targeted
+
+Consequently, task time estimates and point allocation were prepared considering this balance, and the sprint target was set at **48 points** total.
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Tasks</strong></summary>
+
+#### **Frontend ( 15 points)**
+- Implementation of the new logo, replacing the old one
+- Preparation of the Chat Assessment page
+- Updating the donut chart and report names on the My Reports page for better clarity
+- Adding a button to start Chat Assessment from the My Reports section
+- Displaying in-progress conversations with button support to allow users to resume them
+
+#### **Backend ( 21 points)**
+- Integration of machine learning models into the backend
+- Implementation of a dynamic model loading system from Google Drive
+- Integration of prediction logic and data transformation into the backend 
+- Integration of LLM services into the backend
+- Creation of new API endpoints for the chat-based assessment flow 
+- Design and implementation of a Firestore data model to store user-specific sessions and conversation data 
+- Integration with Formspree to enable sending support messages from within the system via email
+
+#### **Language Model and Machine Learning**
+
+**Language Model (LLM) - 8 points:**
+- Refined the current LLM prompt to ensure it produces consistent and well-structured responses aligned with the assessment flow requirements.
+- Ensured the model reliably returns the suspectedCancerType field, which is critical for advancing to the prediction phase.
+- Enhanced prompt wording and format to minimize ambiguity and guide the LLM toward a predictable output structure.
+- Conducted comparative testing of prompt performance across Gemini 1.5, Gemini 1.5 Flash, and Gemini 2.5 models to evaluate response consistency and system integration compatibility.
+
+**Machine Learning (ML) - 4 points:**
+- Developed a FastAPI-based REST API using trained image processing models for three cancer types (colon, lung, leukemia).
+- Maintained a separate folder structure for each model.
+- Created a centralized prediction interface via a main.py file to enable predictions across all models.
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Daily Scrum</strong></summary>
+
+The daily scrum process continued to be conducted via Google Form in this sprint, as it proved to be time-efficient and effective. This method allowed team members to fill out the form at a convenient time during the day, without being restricted to a fixed meeting slot.
+
+If any blockers were mentioned, the Scrum Master reviewed them and followed up directly with the relevant team member to resolve the issue. As in previous sprints, daily reminders were sent via WhatsApp to ensure consistent participation.
+
+**WhatsApp Screenshot:**  
+![WhatsApp Daily Scrum](docs-images/sprints/daily-scrum/daily-scrum-wp-reminder.png)
+
+**Google Form Screenshot:**  
+![Google Form Daily Scrum](docs-images/sprints/daily-scrum/daily-scrum-google-form.png)
+
+![Google Form Daily Scrum Responses - 1](docs-images/sprints/daily-scrum/daily-scrum-google-form-response-sprint3-1.png)
+
+![Google Form Daily Scrum Responses - 2](docs-images/sprints/daily-scrum/daily-scrum-google-form-response-sprint3-2.png)
+
+![Google Form Daily Scrum Responses - 3](docs-images/sprints/daily-scrum/daily-scrum-google-form-response-sprint3-3.png)
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Board Screenshots</strong></summary>
+
+Throughout the sprint, the team used Asana to track the progress of all tasks, monitor their current status, and ensure alignment with the sprint goals.  
+Below are the screenshots of the sprint board at different stages to illustrate how tasks were organized, assigned, and moved across columns (e.g., To Do, In Progress, Done).
+
+**Sprint Board Screenshots:**  
+
+![Sprint Board - 1](docs-images/sprints/sprint-board/sprint-board-sprint3-1.png)
+
+![Sprint Board - 2](docs-images/sprints/sprint-board/sprint-board-sprint3-2.png)
+
+![Sprint Board - 3](docs-images/sprints/sprint-board/sprint-board-sprint3-3.png)
+
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Product Progress Screenshots</strong></summary>
+
+---
+
+<details><summary><strong style="font-size:1em">Frontend</strong></summary>
+
+![Chat Health Assessment Page - 1](docs-images/sprints/product/frontend/chat-general-health-assessment-page.png)
+
+![Chat Health Assessment Page - 2](docs-images/sprints/product/frontend/chat-model-prediction-page.png)
+
+![Ongoing Assessments Pop Up](docs-images/sprints/product/frontend/ongoing-assessment-pop-up.png)
+
+![My Reports Page](docs-images/sprints/product/frontend/my-reports-page.png)
+
+![FAQ Page](docs-images/sprints/product/frontend/final-faq-page.png)
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:1em">Backend</strong></summary>
+
+The first screenshot demonstrates the Support pop-up, which allows users to easily submit their feedback or requests. Behind the scenes, this feature is integrated with Formspree, enabling messages to be delivered directly to the support email without requiring additional backend setup.
+
+![Support Pop Up Email](docs-images/sprints/product/backend/support-pop-up-email.png)
+
+Below is a preview of several endpoints used in the chat-based health assessment process.
+
+![Chat Health Assessment General Test](docs-images/sprints/product/backend/assessment-general-test-process.jpg)
+
+![Chat Health Assessment LLM](docs-images/sprints/product/backend/assessment-llm-process.jpg)
+
+![Chat Health Assessment Model Process](docs-images/sprints/product/backend/assessment-model-process.jpg)
+
+![Auth Http Bearer](docs-images/sprints/product/backend/auth-http-bearer.jpg)
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:1em">Machine Model</strong></summary>
+
+The final outputs of the trained machine learning models are presented below, reflecting the results obtained after the completion of the training and evaluation phases.
+
+![Colon Machine Model Prediction Swagger](docs-images/sprints/product/ml/ml-colon-prediction-swagger.jpg)
+
+![Leukemia Machine Model Prediction Swagger](docs-images/sprints/product/ml/ml-leukemia-prediction-swagger.jpg)
+
+![Lung Machine Model Prediction Swagger](docs-images/sprints/product/ml/ml-lung-prediction-swagger.jpg)
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:1em">Language Model (LLM)</strong></summary>
+
+![Detailed Analysis LLM Prompt](docs-images/sprints/product/llm/final-detailed-analysis-llm-prompt.png)
+
+</details>
+
+</details>
+
+---
+
+<details><summary><strong style="font-size:2em">Sprint Review</strong></summary>
+The planned work for this sprint was successfully completed, with key improvements delivered across LLM integration, backend functionality, and user interface enhancements:
+
+- The second LLM prompt was finalized and integrated, supporting the newly added chat interface that now forms the core of the assessment process. Relevant machine learning models were connected to this flow and configured to be dynamically downloaded from Google Drive, preventing unnecessary bloat in the project’s size.
+- The structure for the first LLM prompt was also updated to align with the latest integration design, completing the full LLM workflow.
+- Backend support for the support pop-up was developed. Using Formspree, user feedback is now sent directly to a designated email address through a clean, form-based submission flow.
+- The My Reports page was redesigned to offer a more personalized experience.
+- A new project logo was introduced.
+- The FAQ section was revised and expanded. Previous questions were replaced with more relevant ones that better reflect common user concerns, improving clarity and self-service support.
+- Frontend improvements focused on making the platform more user-friendly and engaging, encouraging users to actively utilize the chat assessment and reports features.
+- Updates such as clearer risk visualization, easy access to resume conversations, and a refreshed UI helped improve overall usability.
+
+</details>
+
+---
+
+<details>
+<summary><strong style="font-size:2em">Sprint Retrospective</strong></summary>
+
+### What Went Well
+
+- The integration between frontend and backend was completed faster and more smoothly than expected. This integration made the overall system operation clearer and more stable.
+- During this sprint, team members became more active in meetings, clearly expressing their concerns and questions. This led to faster and more inclusive solutions for issues and system design.
+- The redesigned My Reports page significantly improved user experience by offering a centralized location for viewing full conversation history, risk statuses, and launching new assessments.
+- The chat interface was successfully implemented and connected to the second LLM prompt. The integration allowed for smooth dialogue-based assessments, further enhancing user interactivity.
+
+### What Went Badly
+
+- The behavior of the LLM prompts was not tested extensively enough. More comprehensive testing across diverse scenarios and varied user profiles was needed to ensure consistent and reliable responses.
+- The project structure and overall technical workflows were not fully understood by the team. As a result, limited personnel were involved in backend and frontend tasks during this sprint. However, since model training was completed at the end of sprint 2, resource allocation could have been planned more effectively. An informative session to help everyone understand the project end-to-end would have been beneficial.
+
+### Areas for Improvement
+
+- The product scope and task distribution should be clearly defined before the sprint begins, ensuring tasks are allocated to encourage full team participation rather than being limited by individual technical skills.
+- Thorough testing processes need to be enhanced, with more comprehensive test cases covering a variety of user scenarios and profiles, especially for LLM prompts and model behavior.
+- Onboarding sessions should be organized to familiarize all team members with the system architecture, file structure, setup procedures, and where to add or modify code. This would help especially those with reduced workload after the model training phase ended in the previous sprint.
+- To boost motivation, small team-building activities, feedback meetings, and celebrations of milestones should be implemented.
+
+### Future Considerations
+
+(Since a bootcamp event is planned and there is no next sprint, this section contains general improvement suggestions.)
+
+- More machine learning models targeting different types of cancer should be added to the system.
+- Tests involving a wider variety of user profiles and scenarios should be conducted on the LLM side.
+- The ability of LLM prompts to handle different types of outputs should be thoroughly examined.
+- Load testing should be performed to measure system performance when multiple users access it simultaneously.
+
+</details>
+
+---
+
+<details>
+<summary><strong style="font-size:2em">Communication and Project Management Tools</strong></summary>
+
+- **Code Management:** All code repositories are managed on GitHub, with version control in place. The development process is tracked through pull requests.
+
+- **Project Management:** Task assignments and sprint tracking are carried out via the Asana platform.
+
+- **Team Communication:** Instant communication within the team is facilitated through WhatsApp.
+
+- **Daily Progress Tracking:** Daily reporting is conducted through Google Forms. Each team member fills out a short form at the end of the day to report completed work and any encountered blockers.
 
 - **Weekly Meetings:** During the meetings, team members share what they have done, any problems they are facing, what they plan to do next, and what actions they will take before the next meeting. These online meetings are held twice a week (Mondays at 22:00 and Fridays at 22:00) via Google Meet.
 
